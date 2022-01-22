@@ -11,9 +11,29 @@ import os
 def home():
     return render_template('home.html')
 
-@app.route('/filter_results', methods = ['POST', 'GET'])
-def filter_results():
-    return "Filter"
+@app.route('/filter_scholarship_results', methods = ['POST', 'GET'])
+def filter_scholarship_results():
+    if request.method == 'POST':
+        #Get everything that should be filtered by
+        #area of study, institution, gender, nationality, degree type
+        aos = request.form.get('area-of-study-filter') 
+        institution = request.form.get('institution-filter') 
+        gender = request.form.get('gender-filter')          
+        nationality = request.form.get('nationality-filter') 
+        degree_type = request.form.get('degree-type-filter') 
+
+    print("Filtering conditions")
+    print("AOS is "+aos)
+    print("institution is "+institution)
+    print("gender is "+gender)
+    print("nationality is "+nationality)
+    print("degree_type is "+degree_type)
+    print("\n")
+    
+    rows = filter_scholarship(aos, institution, gender, nationality, degree_type)
+    print(rows)
+
+    return "Check Terminal"
 
 @app.route("/scholarship")
 def scholarship():
@@ -67,28 +87,75 @@ def search_template():
     #fetch everything from database
     return render_template('search-template.html',aoss=options[0],institutions=options[1], genders=options[2], nationalities=options[3], degree_types=options[4])
 
+
+
+
 #FILTER OPTIONS
-def filter_scholarship():
+def filter_scholarship(aos, institution, gender, nationality, degree_type):
+    try:
+        con = sqlite3.connect("prototype/static/databases/scholarship_database.db")
+    except:
+        print("Can't connect to database")
+
+    cur = con.cursor()
+
+    #Build query
+    query = "SELECT * FROM scholarship WHERE "
+    parameters = []
+
+    if not aos == "":
+        print("AOS not null")
+        query += "area_of_study = ? AND "
+        parameters.append(aos)
+    if not institution == "":
+        print("Institution is not null")
+        query += "institution = ? AND "
+        parameters.append(institution)
+    if not gender == "":
+        print("gender is not null")
+        query += "gender = ? AND "
+        parameters.append(gender)
+    if not nationality == "":
+        print("nationality is not null")
+        query += "nationality = ? AND "
+        parameters.append(nationality)
+    if not degree_type == "":
+        print("degree_type is not null")
+        query += "degree_type = ? AND "
+        parameters.append(degree_type)
+
+    #Make sure does not end with AND
+    filter_query = query[:-5] + ";"
+    print(filter_query)
+    
+    #execute query and get rows
+    try:
+        cur.execute(filter_query, parameters)
+    except: 
+        print("Error occured when executing query")
+
+    #print to terminal
+    rows = list(cur.fetchall())
+
+    con.close()
+
+    return rows
+
+def filter_bursary(aos, institution, nationality, degree_type):
     #if request.method == 'POST':
         #Get everything that should be filtered by
         #area of study, institution, gender, nationality, degree type
         #aos = request.form.get('area-of-study-filter')
-        
-        aos = "Politics"
-        institution = ""
-        gender = ""
-        nationality = ""
-        degree_type = ""
 
         try:
-            con = sqlite3.connect("prototype/static/databases/scholarship_database.db")
+            con = sqlite3.connect("prototype/static/databases/bursary_database.db")
         except:
-            print("Can't connect to database")
+            print("Connection Error")
 
         cur = con.cursor()
 
         #Build query
-        query = "SELECT * FROM scholarship WHERE "
+        query = "SELECT * FROM bursary WHERE "
         parameters = []
 
         if not aos == "":
@@ -99,10 +166,6 @@ def filter_scholarship():
             print("Institution is not null")
             query += "institution = ? AND "
             parameters.append(institution)
-        if not gender == "":
-            print("gender is not null")
-            query += "gender = ? AND "
-            parameters.append(gender)
         if not nationality == "":
             print("nationality is not null")
             query += "nationality = ? AND "
@@ -119,71 +182,16 @@ def filter_scholarship():
         #execute query and get rows
         try:
             cur.execute(filter_query, parameters)
-        except: 
-            print("Error occured when executing query")
+        except:
+            print("Cannot execute command")
 
-        #print to terminal
         rows = list(cur.fetchall())
-        print(rows)
-
+        
         con.close()
 
-def filter_bursary():
-    #if request.method == 'POST':
-        #Get everything that should be filtered by
-        #area of study, institution, gender, nationality, degree type
-        #aos = request.form.get('area-of-study-filter')
-        
-        aos = "Any"
-        institution = ""
-        nationality = ""
-        degree_type = ""
-
-        with sqlite3.connect("prototype/static/databases/bursary_database.db") as con:
-            cur = con.cursor()
-
-            #Build query
-            query = "SELECT * FROM bursary WHERE "
-            parameters = []
-
-            if not aos == "":
-                print("AOS not null")
-                query += "area_of_study = ? AND "
-                parameters.append(aos)
-            if not institution == "":
-                print("Institution is not null")
-                query += "institution = ? AND "
-                parameters.append(institution)
-            if not nationality == "":
-                print("nationality is not null")
-                query += "nationality = ? AND "
-                parameters.append(nationality)
-            if not degree_type == "":
-                print("degree_type is not null")
-                query += "degree_type = ? AND "
-                parameters.append(degree_type)
-
-            #Make sure does not end with AND
-            filter_query = query[:-5] + ";"
-            print(filter_query)
-            
-            #execute query and get rows
-            cur.execute(filter_query, parameters)
-            rows = list(cur.fetchall())
-            
-            print(rows)
-
-        #except:
-            #con = sqlite3.connect("database.db")
-            #con.rollback()
-            #msg = "Error occurred"
-            #return render_template("result.html", msg=msg)
-
-        #finally:
-            #con.close()            
-
-
-
+        return rows
+                       
+                       
 #LOADING OPTIONS
 def load_scholarship_options():
     #get cursor
