@@ -1,5 +1,5 @@
 import sqlite3
-from flask import Flask
+from flask import Flask, request
 from flask import render_template
 from . import app
 
@@ -9,6 +9,10 @@ import os
 def home():
     return render_template('home.html')
 
+@app.route('/filter_results', methods = ['POST', 'GET'])
+def filter_results():
+    select = request.form.get('select-by')
+    return(str(select))
 
 @app.route("/scholarship")
 def scholarship():
@@ -55,15 +59,18 @@ def bursary():
 
     return render_template('bursary_search.html')#, rows = rows)
 
-
-
+#DELETE
+@app.route("/search_template")
+def search_template():
+    #fetch everything from database
+    return render_template('search-template.html')
 
 #Debugging
 #Print all from database to terminal
 @app.route("/list_bursary")
 def list():
-    if os.path.isfile("prototype/bursary_database.db"):
-        con = sqlite3.connect("prototype/bursary_database.db")
+    if os.path.isfile("prototype/static/databases/bursary_database.db"):
+        con = sqlite3.connect("prototype/static/databases/bursary_database.db")
 
     con.row_factory = sqlite3.Row
     cur = con.cursor()
@@ -79,8 +86,8 @@ def list():
 #Print all from database to terminal
 @app.route("/list_scholarship")
 def list_s():
-    if os.path.isfile("prototype/scholarship_database.db"):
-        con = sqlite3.connect("prototype/scholarship_database.db")
+    if os.path.isfile("prototype/static/databases/scholarship_database.db"):
+        con = sqlite3.connect("prototype/static/databases/scholarship_database.db")
 
     con.row_factory = sqlite3.Row
     cur = con.cursor()
