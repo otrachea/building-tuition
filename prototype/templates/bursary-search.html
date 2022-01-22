@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/css/scholarship-search.css">
+    <link rel="stylesheet" href="../static/css/bursary-search.css">
     <title>{% block title %}{% endblock %}</title>
 </head>
 
@@ -40,7 +40,7 @@
         <div class="container">
             <div class="row top-buffer" id="search-title-row">
                 <div class="col-md-auto mx-auto py-3 px-5 rounded-30" id="search-title-bubble">
-                    <h1>Scholarship Search</h1>
+                    <h1>Bursary Search</h1>
                 </div>
             </div>
 
@@ -101,14 +101,6 @@
                             </select>
                         </div>
                         <div class="col">
-                            <select name="gender-filter" class="form-select" aria-label="Default select example">
-                                <option selected>Gender</option>
-                                {% for gender in genders %}
-                                <option value=\"loop.index\">{{gender}}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="col">
                             <select name="degree-type-filter" class="form-select" aria-label="Default select example">
                                 <option selected>Degree Type</option>
                                 {% for degree_type in degree_types %}
@@ -125,9 +117,6 @@
                 </div>
             </form>
 
-            {% for row in rows %}
-
-            {% endfor %}
 
         </div>
 
