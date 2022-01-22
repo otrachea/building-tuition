@@ -1,17 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Rubik:wght@400;700&display=swap');
+
 .navbar {
     background-color: #011627;
     border: 2px orange solid;
 }
 
-.container {
+.container{
     /* background-color: blue; */
+    font-family: 'Rubik', sans-serif;
+}
+
+h1 {
+    font-size: 38px;
+    font-weight: 600;
+}
+
+h4 {
+    font-size: 24px;
 }
 
 #search-title-bubble {
     background-color: #FFDC96;
-
 }
 
 #search-button {
     background-color: #FFDC96;
+}
+
+.top-buffer {
+    margin-top: 20px;
+}
+
+.rounded-30 {
+    border-radius: 30px;
 }
