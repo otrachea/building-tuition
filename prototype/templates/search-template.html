@@ -12,7 +12,7 @@
 
 <body>
     <div class="page__container">
-
+        
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/" id="logo">BuildingTuition</a>
@@ -29,7 +29,7 @@
                         </li>
 
                         <li class="nav-item mx-3 mx-xl-5">
-                            <a class="nav-link" href="contact"">Bursary Search</a>
+                            <a class="nav-link" href="contact">Bursary Search</a>
                         </li>
     
                     </ul>
@@ -43,71 +43,83 @@
                     <h1>Scholarship Search</h1>
                 </div>
             </div>
-            <div class="row" id="search-by-row">
-                <div class="col">
-                    <h4>Search By</h4>
+
+            <!-- FORM -->
+            <form action = "{{ url_for('filter_results') }}" method="post">
+                <!--Search by keyword-->
+                <div class="form-group">
+                    <div class="row" id="search-by-row">
+                        <div class="col">
+                            <h4>Search By</h4>
+                        </div>
+                        <div class="col">
+                            <select name="select-by" class="form-select" aria-label="Default select example">
+                                <option value="Category" selected>Category</option>
+                                <option value="Name">Name</option>
+                                <option value="Institution">Institution</option>
+                                <option value="Field of Study">Field of Study</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            
+                        </div>
+                    </div>
                 </div>
-                <div class="col">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Category</option>
-                        <option value="1">Name</option>
-                        <option value="2">Institution</option>
-                        <option value="3">Field of Study</option>
-                      </select>
+                                
+                <div class="row" id="seach-filter-title">
+                    <div class="col">
+                        <h2>Filter</h2>
+                    </div>
                 </div>
-                <div class="col">
-                    
+
+                <div class="form-group">
+                    <div class="row" id="search-filter-bar-1">
+                        <div class="col">
+                            <select name="institution-filter" class="form-select" aria-label="Default select example">
+                                <option selected>Institution</option>
+                                {% for institution in institutions %}
+                                <option value=\"loop.index\">institution</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col">
+                            <select name="area-of-study-filter" class="form-select" aria-label="Default select example">
+                                <option selected>Area of Study</option>
+                                {% for aos in aoss %}
+                                <option value=\"loop.index\">aos</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row" id="search-filer-bar-2">
+                        <div class="col">
+                            <select name="nationality-filter" class="form-select" aria-label="Default select example">
+                                <option selected>Nationality</option>
+                                {% for nationality in nationalities %}
+                                <option value=\"loop.index\">nationality</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col">
+                            <select name="gender-filter" class="form-select" aria-label="Default select example">
+                                <option selected>Gender</option>
+                                <option value="1">Female</option>
+                                <option value="2">Male</option>
+                                <option value="3">Other</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <select name="degree-type-filter" class="form-select" aria-label="Default select example">
+                                <option selected>Degree Type</option>
+                                {% for degree_type in degree_types %}
+                                <option value=\"loop.index\">degree_type</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="row" id="seach-filter-title">
-                <div class="col">
-                    <h2>Filter</h2>
-                </div>
-            </div>
-            <div class="row" id="search-filter-bar-1">
-                <div class="col">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Institution</option>
-                        {% for institution in institutions %}
-                        <option value=\"loop.index\">institution</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="col">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Area of Study</option>
-                        {% for aos in aoss %}
-                        <option value=\"loop.index\">aos</option>
-                        {% endfor %}
-                    </select>
-                </div>
-            </div>
-            <div class="row" id="search-filer-bar-2">
-                <div class="col">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Nationality</option>
-                        {% for nationality in nationalities %}
-                        <option value=\"loop.index\">nationality</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="col">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Gender</option>
-                        <option value="1">Female</option>
-                        <option value="2">Male</option>
-                        <option value="3">Other</option>
-                    </select>
-                </div>
-                <div class="col">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Degree Type</option>
-                        {% for degree_type in degree_types %}
-                        <option value=\"loop.index\">degree_type</option>
-                        {% endfor %}
-                    </select>
-                </div>
-            </div>
+                <button type="submit" class="btn btn-default">Go</button>
+            </form>
             <div class="row" id="search-button">
                 <div class="col-md-auto">
                     <button type="button" class="btn" id="search-button">Search</button>
