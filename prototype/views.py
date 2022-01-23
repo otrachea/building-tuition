@@ -94,7 +94,7 @@ def scholarshipInfoPage(id):
 def filter_scholarship(aos, institution, gender, nationality, degree_type):
     try:
         # con = sqlite3.connect("prototype/static/databases/scholarship_database.db")
-        con = sqlite3.connect("C:/Users/franc/Documents/building-tuition/prototype/static/databases/scholarship_database.db")
+        con = sqlite3.connect(os.path.dirname(os.path.abspath(__file__)).replace('\\', '/') +"/static/databases/scholarship_database.db")
     except:
         print("Can't connect to database")
 
@@ -145,7 +145,7 @@ def filter_scholarship(aos, institution, gender, nationality, degree_type):
 def filter_bursary(aos, institution, nationality, degree_type):
     try:
         # con = sqlite3.connect("prototype/static/databases/bursary_database.db")
-        con = sqlite3.connect("C:/Users/franc/Documents/building-tuition/prototype/static/databases/bursary_database.db")
+        con = sqlite3.connect(os.path.dirname(os.path.abspath(__file__)).replace('\\', '/') +"/static/databases/bursary_database.db")
     except:
         print("Connection Error")
 
@@ -190,8 +190,8 @@ def filter_bursary(aos, institution, nationality, degree_type):
 
 def filter_scholarship_by_id(id):
     try:
-    # con = sqlite3.connect("prototype/static/databases/scholarship_database.db")
-        con = sqlite3.connect("C:/Users/franc/Documents/building-tuition/prototype/static/databases/scholarship_database.db")
+        # con = sqlite3.connect("prototype/static/databases/scholarship_database.db")
+        con = sqlite3.connect(os.path.dirname(os.path.abspath(__file__)).replace('\\', '/') +"/static/databases/scholarship_database.db")
     except:
         print("Can't connect to database")
 
@@ -212,7 +212,7 @@ def filter_scholarship_by_id(id):
 def filter_bursary_by_id(id):
     try:
     # con = sqlite3.connect("prototype/static/databases/bursary_database.db")
-        con = sqlite3.connect("C:/Users/franc/Documents/building-tuition/prototype/static/databases/bursary_database.db")
+        con = sqlite3.connect(os.path.dirname(os.path.abspath(__file__)).replace('\\', '/') +"/static/databases/bursary_database.db")
     except:
         print("Can't connect to database")
 
@@ -229,14 +229,17 @@ def filter_bursary_by_id(id):
     con.close()
 
     return row                    
-                       
+
+
 #LOADING OPTIONS
 def load_scholarship_options():
     #get cursor
     # if os.path.isfile("prototype/static/databases/scholarship_database.db"):
         # con = sqlite3.connect("prototype/static/databases/scholarship_database.db")
-    if os.path.isfile("C:/Users/franc/Documents/building-tuition/prototype/static/databases/scholarship_database.db"):
-        con = sqlite3.connect("C:/Users/franc/Documents/building-tuition/prototype/static/databases/scholarship_database.db")
+
+    path = os.path.dirname(os.path.abspath(__file__)).replace('\\', '/') +"/static/databases/scholarship_database.db"
+    if os.path.isfile(path):
+        con = sqlite3.connect(path)
 
     con.row_factory = sqlite3.Row
     cur = con.cursor()
@@ -261,8 +264,10 @@ def load_bursary_options():
     #get cursor
     # if os.path.isfile("prototype/static/databases/bursary_database.db"):
     #     con = sqlite3.connect("prototype/static/databases/bursary_database.db")
-    if os.path.isfile("C:/Users/franc/Documents/building-tuition/prototype/static/databases/bursary_database.db"):
-        con = sqlite3.connect("C:/Users/franc/Documents/building-tuition/prototype/static/databases/bursary_database.db")
+
+    path = os.path.dirname(os.path.abspath(__file__)).replace('\\', '/') +"/static/databases/bursary_database.db"
+    if os.path.isfile(path):
+        con = sqlite3.connect(path)
 
     con.row_factory = sqlite3.Row
     cur = con.cursor()
@@ -290,8 +295,10 @@ def load_bursary_options():
 def list_bursary():
     # if os.path.isfile("prototype/static/databases/bursary_database.db"):
     #     con = sqlite3.connect("prototype/static/databases/bursary_database.db")
-    if os.path.isfile("C:/Users/franc/Documents/building-tuition/prototype/static/databases/bursary_database.db"):
-        con = sqlite3.connect("C:/Users/franc/Documents/building-tuition/prototype/static/databases/bursary_database.db")
+
+    path = os.path.dirname(os.path.abspath(__file__)).replace('\\', '/') +"/static/databases/bursary_database.db"
+    if os.path.isfile(path):
+        con = sqlite3.connect(path)
 
     con.row_factory = sqlite3.Row
     cur = con.cursor()
@@ -306,8 +313,10 @@ def list_bursary():
 def list_scholarship():
     # if os.path.isfile("prototype/static/databases/scholarship_database.db"):
     #     con = sqlite3.connect("prototype/static/databases/scholarship_database.db")
-    if os.path.isfile("C:/Users/franc/Documents/building-tuition/prototype/static/databases/scholarship_database.db"):
-        con = sqlite3.connect("C:/Users/franc/Documents/building-tuition/prototype/static/databases/scholarship_database.db")
+
+    path = os.path.dirname(os.path.abspath(__file__)).replace('\\', '/') +"/static/databases/scholarship_database.db"
+    if os.path.isfile(path):
+        con = sqlite3.connect(path)
 
     con.row_factory = sqlite3.Row
     cur = con.cursor()
