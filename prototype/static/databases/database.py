@@ -16,7 +16,7 @@ def create_scholarship():
 
 def populate_scholarship():
     #Get all rows from csv file
-    with open('D:/Programming/VisualCode/Hackathon/Starhacks real/building-tuition/prototype/scolarship.csv', newline='') as f:
+    with open('D:/Programming/VisualCode/Hackathon/Starhacks real/building-tuition/prototype/scholarship.csv', newline='') as f:
         reader = csv.reader(f)
         next(reader) #skip headers line
         data = list(reader)
@@ -78,4 +78,8 @@ def populate_bursary():
 
     print("Loading completed")
 
+create_scholarship()
 populate_scholarship()
+
+create_bursary()
+populate_bursary()

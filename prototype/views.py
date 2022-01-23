@@ -9,7 +9,23 @@ import os
 
 @app.route("/")
 def home():
+    #Debugging
+    print(load_bursary_options())
+    print(load_scholarship_options())
+
     return render_template('home.html')
+
+@app.route("/scholarship")
+def scholarship():
+    options = load_scholarship_options()
+    return render_template('scholarship-search.html',aoss=options[0],institutions=options[1], genders=options[2], nationalities=options[3], degree_types=options[4])
+
+@app.route("/bursary")
+def bursary():
+    options = load_bursary_options()
+
+    return render_template('bursary-search.html',aoss=options[0],institutions=options[1], nationalities=options[2], degree_types=options[3])
+
 
 @app.route('/filter_scholarship_results', methods = ['POST', 'GET'])
 def filter_scholarship_results():
@@ -35,57 +51,29 @@ def filter_scholarship_results():
 
     return "Check Terminal"
 
-@app.route("/scholarship")
-def scholarship():
-    """
-    if os.path.isfile("scholarship_database.db"):
-        con = sqlite3.connect("scholarship_database.db")
+@app.route('/filter_bursary_results', methods = ['POST', 'GET'])
+def filter_bursary_results():
+    if request.method == 'POST':
+        #Get everything that should be filtered by
+        #area of study, institution, gender, nationality, degree type
+        aos = request.form.get('area-of-study-filter') 
+        institution = request.form.get('institution-filter')          
+        nationality = request.form.get('nationality-filter') 
+        degree_type = request.form.get('degree-type-filter') 
 
-    con.row_factory = sqlite3.Row
-    cur = con.cursor()
+    #Debugging
+    print("Filtering conditions")
+    print("AOS is "+aos)
+    print("institution is "+institution)
+    print("nationality is "+nationality)
+    print("degree_type is "+degree_type)
+    print("\n")
+    
+    rows = filter_bursary(aos, institution, nationality, degree_type)
+    print(rows)
 
-    #write query
-    query = "select * from scholarship where type = ?"
+    return "Check Terminal"
 
-    #execute queries and get rows
-    cur.execute(query)
-    rows = cur.fetchall() 
-
-    cur.close()
-    """
-
-    return render_template('scholarship_search.html')#, rows = rows)
-
-@app.route("/bursary")
-def bursary():
-    """
-    con = sqlite3.connect("prototype/bursary_database.db")
-
-    con.row_factory = sqlite3.Row
-    cur = con.cursor()
-
-    #write query and filter
-    query = "select * from bursary where type = ?"
-
-    #execute queries and get rows
-    cur.execute(query)
-    rows = cur.fetchall() 
-
-    cur.close()
-
-    #Debug
-    for r in rows:
-        print(r[0])
-    """
-
-    return render_template('bursary_search.html')#, rows = rows)
-
-#CHANGE
-@app.route("/search_template")
-def search_template():
-    options = load_scholarship_options()
-    #fetch everything from database
-    return render_template('search-template.html',aoss=options[0],institutions=options[1], genders=options[2], nationalities=options[3], degree_types=options[4])
 
 
 
@@ -142,55 +130,50 @@ def filter_scholarship(aos, institution, gender, nationality, degree_type):
     return rows
 
 def filter_bursary(aos, institution, nationality, degree_type):
-    #if request.method == 'POST':
-        #Get everything that should be filtered by
-        #area of study, institution, gender, nationality, degree type
-        #aos = request.form.get('area-of-study-filter')
+    try:
+        con = sqlite3.connect("prototype/static/databases/bursary_database.db")
+    except:
+        print("Connection Error")
 
-        try:
-            con = sqlite3.connect("prototype/static/databases/bursary_database.db")
-        except:
-            print("Connection Error")
+    cur = con.cursor()
 
-        cur = con.cursor()
+    #Build query
+    query = "SELECT * FROM bursary WHERE "
+    parameters = []
 
-        #Build query
-        query = "SELECT * FROM bursary WHERE "
-        parameters = []
+    if not aos == "":
+        print("AOS not null")
+        query += "area_of_study = ? AND "
+        parameters.append(aos)
+    if not institution == "":
+        print("Institution is not null")
+        query += "institution = ? AND "
+        parameters.append(institution)
+    if not nationality == "":
+        print("nationality is not null")
+        query += "nationality = ? AND "
+        parameters.append(nationality)
+    if not degree_type == "":
+        print("degree_type is not null")
+        query += "degree_type = ? AND "
+        parameters.append(degree_type)
 
-        if not aos == "":
-            print("AOS not null")
-            query += "area_of_study = ? AND "
-            parameters.append(aos)
-        if not institution == "":
-            print("Institution is not null")
-            query += "institution = ? AND "
-            parameters.append(institution)
-        if not nationality == "":
-            print("nationality is not null")
-            query += "nationality = ? AND "
-            parameters.append(nationality)
-        if not degree_type == "":
-            print("degree_type is not null")
-            query += "degree_type = ? AND "
-            parameters.append(degree_type)
+    #Make sure does not end with AND
+    filter_query = query[:-5] + ";"
+    print(filter_query)
+    
+    #execute query and get rows
+    try:
+        cur.execute(filter_query, parameters)
+    except:
+        print("Cannot execute command")
 
-        #Make sure does not end with AND
-        filter_query = query[:-5] + ";"
-        print(filter_query)
-        
-        #execute query and get rows
-        try:
-            cur.execute(filter_query, parameters)
-        except:
-            print("Cannot execute command")
+    rows = list(cur.fetchall())
+    
+    con.close()
 
-        rows = list(cur.fetchall())
-        
-        con.close()
-
-        return rows
-                       
+    return rows
+                    
                        
 #LOADING OPTIONS
 def load_scholarship_options():
@@ -240,9 +223,6 @@ def load_bursary_options():
         options.append(op)
 
     return options
-
-
-
 
 
 #Debugging

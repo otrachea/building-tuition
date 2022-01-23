@@ -45,7 +45,7 @@
             </div>
 
             <!-- FORM -->
-            <form action = "{{ url_for('filter_results') }}" method="post">
+            <form action = "{{ url_for('filter_bursary_results') }}" method="post">
                 <!--Search by keyword-->
                 <div class="form-group">
                     <div class="row top-buffer" id="search-by-row">
@@ -76,7 +76,7 @@
                     <div class="row top-buffer" id="search-filter-bar-1">
                         <div class="col">
                             <select name="institution-filter" class="form-select" aria-label="Default select example">
-                                <option selected>Institution</option>
+                                <option value="" selected>Institution</option>
                                 {% for institution in institutions %}
                                 <option value="{{institution}}">{{institution}}</option>
                                 {% endfor %}
@@ -84,7 +84,7 @@
                         </div>
                         <div class="col">
                             <select name="area-of-study-filter" class="form-select" aria-label="Default select example">
-                                <option selected>Area of Study</option>
+                                <option value="" selected>Area of Study</option>
                                 {% for aos in aoss %}
                                 <option value="{{aos}}">{{aos}}</option>
                                 {% endfor %}
@@ -94,7 +94,7 @@
                     <div class="row top-buffer" id="search-filer-bar-2">
                         <div class="col">
                             <select name="nationality-filter" class="form-select" aria-label="Default select example">
-                                <option selected>Nationality</option>
+                                <option value="" selected>Nationality</option>
                                 {% for nationality in nationalities %}
                                 <option value="{{nationality}}">{{nationality}}</option>
                                 {% endfor %}
@@ -102,7 +102,7 @@
                         </div>
                         <div class="col">
                             <select name="degree-type-filter" class="form-select" aria-label="Default select example">
-                                <option selected>Degree Type</option>
+                                <option value="" selected>Degree Type</option>
                                 {% for degree_type in degree_types %}
                                 <option value="{{degree_type}}">{{degree_type}}</option>
                                 {% endfor %}
