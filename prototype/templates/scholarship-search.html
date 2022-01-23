@@ -104,7 +104,7 @@
                             <select name="gender-filter" class="form-select" aria-label="Default select example">
                                 <option value="" selected>Gender</option>
                                 {% for gender in genders %}
-                                <option value="{{gender}}"">{{gender}}</option>
+                                <option value="{{gender}}">{{gender}}</option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -125,9 +125,23 @@
                 </div>
             </form>
 
-            {% for row in rows %}
-
-            {% endfor %}
+            <div class="row" style="padding: 2.5em">
+                {% for row in rows %}
+                <div class="col-md-4">
+                    <div class="card scholarship-card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{row[0]}}</h5>
+                            <h7 class="card-subtitle mb-2">{{row[3]}}</h7><br>
+                            <h7 class="card-subtitle mb-2">{{row[2]}}</h7>
+                            <span class="card-text">{{row[1]}}</span><br>
+                            <span class="card-text">Deadline: {{row[10]}}</span>  
+                            <button class="btn btn-default">More Info</button>
+                        </div>
+                    </div>
+                </div>   
+                {% endfor %} 
+            </div>
+            
 
         </div>
 

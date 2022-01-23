@@ -9,16 +9,13 @@ import os
 
 @app.route("/")
 def home():
-    #Debugging
-    print(load_bursary_options())
-    print(load_scholarship_options())
-
-    return render_template('home.html')
+    return "Home"
 
 @app.route("/scholarship")
 def scholarship():
     options = load_scholarship_options()
-    return render_template('scholarship-search.html',aoss=options[0],institutions=options[1], genders=options[2], nationalities=options[3], degree_types=options[4])
+    rows = list_scholarship()
+    return render_template('scholarship-search.html',aoss=options[0],institutions=options[1], genders=options[2], nationalities=options[3], degree_types=options[4], rows=rows)
 
 @app.route("/bursary")
 def bursary():
@@ -49,7 +46,7 @@ def filter_scholarship_results():
     rows = filter_scholarship(aos, institution, gender, nationality, degree_type)
     print(rows)
 
-    return "Check Terminal"
+    return render_template('scholarship-search.html', rows=rows)
 
 @app.route('/filter_bursary_results', methods = ['POST', 'GET'])
 def filter_bursary_results():
@@ -72,7 +69,7 @@ def filter_bursary_results():
     rows = filter_bursary(aos, institution, nationality, degree_type)
     print(rows)
 
-    return "Check Terminal"
+    return render_template('bursary-search.html', rows=rows)
 
 
 
@@ -244,7 +241,6 @@ def list_bursary():
     return "Rows returned. Check terminal"
 
 #Print all from database to terminal
-@app.route("/list_scholarship")
 def list_scholarship():
     if os.path.isfile("prototype/static/databases/scholarship_database.db"):
         con = sqlite3.connect("prototype/static/databases/scholarship_database.db")
@@ -254,11 +250,9 @@ def list_scholarship():
 
     cur.execute("select * from scholarship")
 
-    rows = cur.fetchall()
-    result = [list(i) for i in rows]
-    print(result)
-
-    return "Rows returned. Check terminal"
+    rows = list(cur.fetchall())
+    
+    return rows
 
 #DEBUG
 @app.route('/filter')
