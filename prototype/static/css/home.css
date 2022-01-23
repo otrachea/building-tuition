@@ -19,7 +19,6 @@ html, body {
 .logo {
     font-size: 28px;
     text-shadow: 2px 3px 3px #FF3366;
-
 }
 
 #header-logo {
@@ -64,6 +63,65 @@ html, body {
 
 #scholarship-search-icon {
     filter: invert(86%) sepia(18%) saturate(917%) hue-rotate(338deg) brightness(104%) contrast(99%)
+}
+
+
+/* CARDS */
+.top-buffer{
+    margin-top: 20px; 
+}
+
+.scholarship-cards .card{
+    background-color: #FFDC96;
+}
+
+.bursary-cards .card{
+    background-color: #FF3366;
+}
+
+.card{
+    margin: 2em 0em 2em 0em;
+}
+
+.card-body{
+    padding: 1em 1em 4em 1em;
+}
+
+.card h5{
+    font-weight: 800;    
+}
+
+.card h7{
+    font-size: 14px;
+}
+
+.card-text{
+    font-size:large;
+}
+
+.more-info-btn{
+    background-color: #2EC4B6;
+    width: 150px;
+    position: absolute;
+    bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.cards-group .row{
+    overflow: hidden; 
+}
+
+.cards-group [class*="col-"]{
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+}
+
+.rounded-30 {
+    border-radius: 30px;
 }
 
 footer {

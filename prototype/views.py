@@ -10,7 +10,11 @@ import os, sys
 
 @app.route("/")
 def home():
-    return render_template('home.html')
+    #Get first 3 rows of scholarship
+    s_rows = list_scholarship()[:3]
+    b_rows = list_bursary()[:3]
+
+    return render_template('home.html',scholarship_rows=s_rows, bursary_rows=b_rows)
 
 #-------------------- LOADING SEARCH PAGES --------------------------
 @app.route("/scholarship")
@@ -51,13 +55,12 @@ def search_scholarship_results():
         category = request.form.get('search_by') 
         search = request.form['search_scholarship_value']
 
-        if category=="" or search == "":
+        if category=="Category" or search == "":
             rows = list_scholarship() #return all
         else:
             rows = search_scholarship(category, search) #search
 
     return render_template('scholarship-search.html',aoss=options[0],institutions=options[1], genders=options[2], nationalities=options[3], degree_types=options[4], rows=rows)
-
 
 @app.route('/search_bursary_results', methods = ['POST', 'GET'])
 def search_bursary_results():
@@ -85,14 +88,12 @@ def search_bursary_results():
         category = request.form.get('search_by') 
         search = request.form['search_bursary_value']
 
-        if category=="" or search == "":
+        if category=="Category" or search == "":
             rows = list_bursary() #return all
         else:
             rows = search_bursary(category, search) #search
 
     return render_template('bursary-search.html',aoss=options[0],institutions=options[1], nationalities=options[2], degree_types=options[3], rows=rows)
-
-
 
 
 #-------------------- FILTERING SEARCH PAGES --------------------------
@@ -143,7 +144,8 @@ def scholarshipInfoPage(id):
     elif id[0] == 'b': # IF BURSARY
         row = filter_bursary_by_id(id)[0]
         return render_template('bursary-info.html', name=row[0], institution=row[1], fos=row[2], description=desc, url=row[3])
-
+    else:
+        return "404 Error Not Found"
         
 #-------------------- FILTER OPTIONS --------------------
 def filter_scholarship(aos, institution, gender, nationality, degree_type):
