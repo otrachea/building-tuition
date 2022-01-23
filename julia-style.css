@@ -1,23 +1,34 @@
-.flex-container-1 {
-    display: flex;
-    flex-direction: row;
+.titleimgfinal {
+    width: 100%;
+    height: 100%;
 }
 
-.title {
-    background-color: yellow;
+.flex-container-1 {
+    display: flex; 
+    flex-direction: row;
+    justify-content: center; 
 }
+
+
 
 .titleimg {
-   width: 50%;
-   position: absolute;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+   height: 50%;
    left: 0px;
-   height: 100%
 }
 
 .titlepara {
-    width: 50%;
-   position: absolute;
-   right: 0px;
+   width: 100%;
+   text-align: center;
+   background: #2EC4B6;
    vertical-align: middle;
+   padding: 30px;
+   font-size: 32px;
+   border: solid 6px #FF3366;
+   border-radius: 25px;
+
 
 }
