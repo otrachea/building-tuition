@@ -19,6 +19,10 @@ h4 {
     font-size: 24px;
 }
 
+select {
+    background-color: rgb(219, 219, 219);
+}
+
 .top-buffer {
     margin-top: 20px;
 }
@@ -30,4 +34,40 @@ h4 {
 button {
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+#buttons button{
+    background-color: #2EC4B6;
+    border-radius: 10px;
+}
+
+#buttons a {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 10px;
+    background-color: #ACD2F9;
+}
+
+#buttons button, #buttons a {
+    width: 120px;
+}
+
+.card{
+    margin: 2em 0em 2em 0em;
+}
+
+.card h5{
+    font-weight: 800;    
+}
+
+.card h7{
+    font-size: 14px;
+}
+
+.more-info-btn{
+    background-color: #2EC4B6; 
+    width: 150px;
+}
+
+.card-text{
+    font-size:large;
 }

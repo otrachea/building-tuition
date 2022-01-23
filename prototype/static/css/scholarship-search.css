@@ -4,6 +4,8 @@
     background-color: #FFDC96;
 }
 
-#search-button button{
+.card {
     background-color: #FFDC96;
+    height: 80%;
 }
+

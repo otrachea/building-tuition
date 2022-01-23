@@ -8,7 +8,8 @@ def create_scholarship():
 
     #Create table
     conn.execute("""CREATE TABLE scholarship (name TEXT, price TEXT, area_of_study TEXT, institution TEXT, gender TEXT, 
-                                            nationality TEXT, country TEXT, residency TEXT, url TEXT, degree_type TEXT, deadline TEXT)""")
+                                            nationality TEXT, country TEXT, residency TEXT, url TEXT, degree_type TEXT,
+                                            deadline TEXT,id TEXT PRIMARY KEY)""")
 
     print("table created")
 
@@ -29,9 +30,9 @@ def populate_scholarship():
     for row in data:
         print(row) #Debug
         insert_query = """INSERT INTO scholarship (name, price, area_of_study, institution, gender, 
-                                        nationality, country, residency, url, degree_type, deadline)
-                                        VALUES (?,?,?,?,?,?,?,?,?,?,?)"""
-        cur.execute(insert_query, (row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10]))
+                                        nationality, country, residency, url, degree_type, deadline, id)
+                                        VALUES (?,?,?,?,?,?,?,?,?,?,?,?)"""
+        cur.execute(insert_query, (row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11]))
 
     #Save changes
     conn.commit()
@@ -46,7 +47,7 @@ def create_bursary():
 
     #Create table
     conn.execute("""CREATE TABLE bursary (name TEXT, age TEXT, area_of_study TEXT, institution TEXT, degree_type TEXT, 
-                                            nationality TEXT, country TEXT, residency TEXT, url TEXT)""")
+                                            nationality TEXT, country TEXT, residency TEXT, url TEXT, id TEXT PRIMARY KEY)""")
 
     print("table created")
 
@@ -67,9 +68,9 @@ def populate_bursary():
     for row in data:
         print(row) #Debug
         insert_query = """INSERT INTO bursary (name, age, area_of_study, institution, degree_type, 
-                                        nationality, country, residency, url)
-                                        VALUES (?,?,?,?,?,?,?,?,?)"""
-        cur.execute(insert_query, (row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8]))
+                                        nationality, country, residency, url, id)
+                                        VALUES (?,?,?,?,?,?,?,?,?,?)"""
+        cur.execute(insert_query, (row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9]))
 
     #Save changes
     conn.commit()
