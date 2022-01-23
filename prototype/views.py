@@ -29,6 +29,7 @@ def b_info():
 
 @app.route('/filter_scholarship_results', methods = ['POST', 'GET'])
 def filter_scholarship_results():
+    options = load_scholarship_options()
     if request.method == 'POST':
         #Get everything that should be filtered by
         #area of study, institution, gender, nationality, degree type
@@ -49,10 +50,12 @@ def filter_scholarship_results():
     rows = filter_scholarship(aos, institution, gender, nationality, degree_type)
     print(rows)
 
-    return render_template('scholarship-search.html', rows=rows)
+    return render_template('scholarship-search.html',aoss=options[0],institutions=options[1], genders=options[2], nationalities=options[3], degree_types=options[4], rows=rows)
 
 @app.route('/filter_bursary_results', methods = ['POST', 'GET'])
 def filter_bursary_results():
+    options = load_bursary_options()
+
     if request.method == 'POST':
         #Get everything that should be filtered by
         #area of study, institution, gender, nationality, degree type
@@ -72,7 +75,7 @@ def filter_bursary_results():
     rows = filter_bursary(aos, institution, nationality, degree_type)
     print(rows)
 
-    return render_template('bursary-search.html', rows=rows)
+    return render_template('bursary-search.html',aoss=options[0],institutions=options[1], nationalities=options[2], degree_types=options[3], rows=rows)
 
 #ALL INFO PAGES
 @app.route('/s1')
