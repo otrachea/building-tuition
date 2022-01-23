@@ -33,11 +33,6 @@ html, body {
     font-weight: 500;
 }
 
-.search-icon {
-    margin-left: 5px;
-    width: 27px;
-}
-
 /* .search-icon:hover {
     filter: invert(100%) sepia(1%) saturate(4281%) hue-rotate(174deg) brightness(97%) contrast(101%);
     fill: #F6F7F8;
@@ -83,6 +78,7 @@ footer a:visited {
     color: white;
 }
 
+/*
 .container .row .col:nth-child(2) div:nth-child(1){
     background-color: #27DB96;
     width: 30vw;
@@ -97,6 +93,7 @@ footer a:visited {
     top: -25vh;
     left: 20px;
 }
+*/
 
 /* FROM julia-style.css */
 .titleimgfinal {

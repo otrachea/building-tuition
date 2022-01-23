@@ -1,6 +1,7 @@
-from re import template
+from re import search, template
 import sqlite3
 from typing import final
+from unicodedata import category
 from flask import Flask, request
 from flask import render_template
 from . import app
@@ -11,6 +12,7 @@ import os, sys
 def home():
     return render_template('home.html')
 
+#-------------------- LOADING SEARCH PAGES --------------------------
 @app.route("/scholarship")
 def scholarship():
     options = load_scholarship_options()
@@ -23,6 +25,77 @@ def bursary():
     rows = list_bursary()
     return render_template('bursary-search.html',aoss=options[0],institutions=options[1], nationalities=options[2], degree_types=options[3], rows=rows)
 
+
+#-------------------- SEARCHING SEARCH PAGES --------------------------
+@app.route('/search_scholarship_results', methods = ['POST', 'GET'])
+def search_scholarship_results():
+    def search_scholarship(category, search):
+        try:
+            #con = sqlite3.connect("prototype/static/databases/scholarship_database.db")
+            con = sqlite3.connect(os.path.dirname(os.path.abspath(__file__)).replace('\\', '/') +"/static/databases/scholarship_database.db")
+        except:
+            print("Can't connect to database")
+
+        cur = con.cursor()
+
+        #Build query!!!!!
+        query = "SELECT * FROM scholarship WHERE "+category+" LIKE '%"+search+"%';"
+        cur.execute(query)
+
+        rows = list(cur.fetchall())
+
+        return rows
+
+    options = load_scholarship_options()
+    if request.method == 'POST':
+        category = request.form.get('search_by') 
+        search = request.form['search_scholarship_value']
+
+        if category=="" or search == "":
+            rows = list_scholarship() #return all
+        else:
+            rows = search_scholarship(category, search) #search
+
+    return render_template('scholarship-search.html',aoss=options[0],institutions=options[1], genders=options[2], nationalities=options[3], degree_types=options[4], rows=rows)
+
+
+@app.route('/search_bursary_results', methods = ['POST', 'GET'])
+def search_bursary_results():
+    def search_bursary(category, search):
+        print("Connecting database")
+        try:
+            #con = sqlite3.connect("prototype/static/databases/scholarship_database.db")
+            con = sqlite3.connect(os.path.dirname(os.path.abspath(__file__)).replace('\\', '/') +"/static/databases/bursary_database.db")
+        except:
+            print("Can't connect to database")
+
+        cur = con.cursor()
+
+        #Build query!!!!!
+        query = "SELECT * FROM bursary WHERE "+category+" LIKE '%"+search+"%';"
+        cur.execute(query)
+
+        rows = list(cur.fetchall())
+
+        return rows
+
+    print("search bursary results")
+    options = load_bursary_options()
+    if request.method == 'POST':
+        category = request.form.get('search_by') 
+        search = request.form['search_bursary_value']
+
+        if category=="" or search == "":
+            rows = list_bursary() #return all
+        else:
+            rows = search_bursary(category, search) #search
+
+    return render_template('bursary-search.html',aoss=options[0],institutions=options[1], nationalities=options[2], degree_types=options[3], rows=rows)
+
+
+
+
+#-------------------- FILTERING SEARCH PAGES --------------------------
 @app.route('/filter_scholarship_results', methods = ['POST', 'GET'])
 def filter_scholarship_results():
     options = load_scholarship_options()
@@ -35,16 +108,7 @@ def filter_scholarship_results():
         nationality = request.form.get('nationality-filter') 
         degree_type = request.form.get('degree-type-filter') 
 
-    print("Filtering conditions")
-    print("AOS is "+aos)
-    print("institution is "+institution)
-    print("gender is "+gender)
-    print("nationality is "+nationality)
-    print("degree_type is "+degree_type)
-    print("\n")
-    
     rows = filter_scholarship(aos, institution, gender, nationality, degree_type)
-    print(rows)
 
     return render_template('scholarship-search.html',aoss=options[0],institutions=options[1], genders=options[2], nationalities=options[3], degree_types=options[4], rows=rows)
 
@@ -59,21 +123,12 @@ def filter_bursary_results():
         institution = request.form.get('institution-filter')          
         nationality = request.form.get('nationality-filter') 
         degree_type = request.form.get('degree-type-filter') 
-
-    #Debugging
-    print("Filtering conditions")
-    print("AOS is "+aos)
-    print("institution is "+institution)
-    print("nationality is "+nationality)
-    print("degree_type is "+degree_type)
-    print("\n")
     
     rows = filter_bursary(aos, institution, nationality, degree_type)
-    print(rows)
 
     return render_template('bursary-search.html',aoss=options[0],institutions=options[1], nationalities=options[2], degree_types=options[3], rows=rows)
 
-#INFO PAGES
+#-------------------- INFO PAGES --------------------
 @app.route('/<id>')
 def scholarshipInfoPage(id):
     desc = """Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Porta non pulvinar neque laoreet suspendisse interdum. Diam phasellus vestibulum lorem sed risus ultricies tristique. Suscipit tellus mauris a diam maecenas sed enim ut sem. Interdum velit laoreet id donec ultrices. Facilisis leo vel fringilla est ullamcorper eget nulla facilisi etiam. In nisl nisi scelerisque eu ultrices. Pharetra magna ac placerat vestibulum lectus. Sociis natoque penatibus et magnis dis parturient montes nascetur. Congue quisque egestas diam in arcu.
@@ -81,16 +136,16 @@ def scholarshipInfoPage(id):
             Amet venenatis urna cursus eget nunc scelerisque. Ut morbi tincidunt augue interdum velit. A diam maecenas sed enim. Lorem dolor sed viverra ipsum. Cursus eget nunc scelerisque viverra mauris in aliquam sem. Odio pellentesque diam volutpat commodo sed egestas egestas. Venenatis urna cursus eget nunc scelerisque viverra. Interdum velit euismod in pellentesque massa placerat. Lectus quam id leo in vitae turpis. Amet mattis vulputate enim nulla aliquet porttitor lacus luctus. Elementum sagittis vitae et leo duis ut diam. Sit amet risus nullam eget felis eget nunc. Condimentum lacinia quis vel eros donec ac odio. Eu non diam phasellus vestibulum lorem sed risus ultricies. Arcu ac tortor dignissim convallis aenean et tortor. Id volutpat lacus laoreet non curabitur.
             Dictum varius duis at consectetur. Non curabitur gravida arcu ac. Dignissim enim sit amet venenatis urna cursus eget. Justo nec ultrices dui sapien eget mi. Ipsum a arcu cursus vitae congue mauris rhoncus aenean vel. Sed lectus vestibulum mattis ullamcorper velit sed ullamcorper morbi. Scelerisque mauris pellentesque pulvinar pellentesque. Libero justo laoreet sit amet cursus sit amet dictum. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus. Est sit amet facilisis magna etiam tempor orci eu lobortis. Sodales ut eu sem integer vitae. At lectus urna duis convallis convallis tellus id. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam. Nam libero justo laoreet sit amet. Vestibulum lorem sed risus ultricies tristique nulla aliquet enim. Mauris a diam maecenas sed enim ut sem viverra. Metus vulputate eu scelerisque felis. Vestibulum rhoncus est pellentesque elit. Risus at ultrices mi tempus imperdiet nulla malesuada pellentesque. Arcu odio ut sem nulla pharetra.
             """
-
+    
     if id[0] == 's': # IF SCHOLARSHIP
         row = filter_scholarship_by_id(id)[0]
         return render_template('scholarship-info.html', name=row[0], institution=row[1], amount=row[2], fos=row[3], deadline=row[4], description=desc, url=row[5])
-    else: # IF BURSARY
+    elif id[0] == 'b': # IF BURSARY
         row = filter_bursary_by_id(id)[0]
         return render_template('bursary-info.html', name=row[0], institution=row[1], fos=row[2], description=desc, url=row[3])
 
-
-#FILTER OPTIONS
+        
+#-------------------- FILTER OPTIONS --------------------
 def filter_scholarship(aos, institution, gender, nationality, degree_type):
     try:
         # con = sqlite3.connect("prototype/static/databases/scholarship_database.db")
@@ -188,6 +243,7 @@ def filter_bursary(aos, institution, nationality, degree_type):
 
     return rows
 
+#-------------------- GET ID FUNCTIONS --------------------
 def filter_scholarship_by_id(id):
     try:
         # con = sqlite3.connect("prototype/static/databases/scholarship_database.db")
@@ -230,8 +286,7 @@ def filter_bursary_by_id(id):
 
     return row                    
 
-
-#LOADING OPTIONS
+#-------------------- LOADING OPTIONS FUNCTIONS --------------------
 def load_scholarship_options():
     #get cursor
     # if os.path.isfile("prototype/static/databases/scholarship_database.db"):

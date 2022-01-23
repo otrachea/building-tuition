@@ -13,24 +13,33 @@
 </div>
 
 <!-- FORM -->
-<form action="{{ url_for('filter_scholarship_results') }}" method="post">
+<!--Search by keyword-->
+<form action="{{ url_for('search_scholarship_results') }}" method="post">
     <!--Search by keyword-->
     <div class="form-group">
         <div class="row top-buffer" id="search-by-row">
+            <!-- <div class="col-md-auto">
+                            <h4>Search By</h4>
+                        </div> -->
             <div class="col-3">
-                <select name="select-by" class="form-select" aria-label="Default select example">
+                <select name="search_by" class="form-select" aria-label="Default select example">
                     <option value="Category" selected>Category</option>
-                    <option value="Name">Name</option>
-                    <option value="Institution">Institution</option>
-                    <option value="Field of Study">Field of Study</option>
+                    <option value="name">Name</option>
+                    <option value="institution">Institution</option>
+                    <option value="area_of_study">Field of Study</option>
                 </select>
             </div>
-            <div class="col">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <div class="col-8">  
+                <input name="search_scholarship_value" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">                  
+            </div>
+            <div class="col-1 d-flex justify-content-center">
+                <button type="submit" class="search-button w-100"></button>
             </div>
         </div>
     </div>
+</form>
 
+<form action="{{ url_for('filter_scholarship_results') }}" method="post">
     <div class="row top-buffer" id="seach-filter-title">
         <div class="col">
             <h2>Filter</h2>

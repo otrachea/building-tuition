@@ -21,9 +21,11 @@ h4 {
 
 .form-select {
     background: #e7e6e6;
+    border-radius: 1rem !important;
 }
 .form-control {
     background: #e7e6e6;
+    border-radius: 1rem !important;
 }
 
 
@@ -91,9 +93,20 @@ button {
     overflow: hidden; 
 }
 
-[class*="col-"]{
+.cards-group [class*="col-"]{
     margin-bottom: -99999px;
     padding-bottom: 99999px;
+}
+
+.search-icon {
+    margin-left: 5px;
+    width: 27px;
+}
+
+.search-button{
+    background-image: url('../assets/search_icon.png');
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 
