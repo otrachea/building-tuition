@@ -131,9 +131,10 @@ def filter_bursary_results():
 #-------------------- INFO PAGES --------------------
 @app.route('/<id>')
 def scholarshipInfoPage(id):  
+    desc = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     if id[0] == 's': # IF SCHOLARSHIP
         row = filter_scholarship_by_id(id)[0]
-        return render_template('scholarship-info.html', name=row[0], institution=row[1], amount=row[2], fos=row[3], deadline=row[4], url=row[5], description=row[6])
+        return render_template('scholarship-info.html', name=row[0], institution=row[1], amount=row[2], fos=row[3],description=desc, deadline=row[4], url=row[5])
     elif id[0] == 'b': # IF BURSARY
         row = filter_bursary_by_id(id)[0]
         return render_template('bursary-info.html', name=row[0], institution=row[1], fos=row[2], url=row[3], description=row[4])
@@ -249,7 +250,7 @@ def filter_scholarship_by_id(id):
     cur = con.cursor()
 
     # BUILD QUERY
-    query = "SELECT name, institution, price, area_of_study, deadline, url, desc FROM scholarship WHERE id='" + id + "'"
+    query = "SELECT name, institution, price, area_of_study, deadline, url FROM scholarship WHERE id='" + id + "'"
     try:
         cur.execute(query)
     except: 
