@@ -5,6 +5,7 @@ from . import app
 
 import os
 from twilio.rest import Client
+from twilio.base.exceptions import TwilioRestException
 
 @app.route("/")
 def home():
@@ -380,21 +381,23 @@ def text_message():
     print("text message run")
     def send_to(msg, phone_number):
         account_sid = 'ACc245ce913c51ebbaa5c7ff3ccc6c9c13'
-        auth_token = '75aef3993e15cf81cf93fb79597aa319'
+        auth_token = '0b0d8d179ac22d33c1ea31b976915f7b'
         client = Client(account_sid, auth_token)
 
-        message = client.messages \
-                        .create(
-                            body=msg,
-                            from_='+447588100237',
-                            to=phone_number
-                        )
+        try:
+            message = client.messages \
+                            .create(
+                                body=msg,
+                                from_='+447588100237',
+                                to=phone_number
+                            )
+        except TwilioRestException as e:
+            print(e)
 
     if request.method == 'POST':
         phone_number = request.form.get('phone-number') 
-        print(phone_number)
         msg = "Reminder of a deadline"
         send_to(msg, phone_number)
 
-    return
+    return scholarshipInfoPage('b1')
 
