@@ -3,3 +3,24 @@
     height: 100%;
     padding-top: 100px;
 }
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(51, 58, 65);
+    text-align: center;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    font-size: 10px;
+ }
+
+#footerimg {
+    width: 20%;
+    height: 20%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
