@@ -20,12 +20,16 @@ def scholarship():
 @app.route("/bursary")
 def bursary():
     options = load_bursary_options()
+    rows = list_bursary()
+    return render_template('bursary-search.html',aoss=options[0],institutions=options[1], nationalities=options[2], degree_types=options[3], rows=rows)
 
-    return render_template('bursary-search.html',aoss=options[0],institutions=options[1], nationalities=options[2], degree_types=options[3])
-
+@app.route("/bursary-info")
+def b_info():
+    return render_template("bursary-info.html")
 
 @app.route('/filter_scholarship_results', methods = ['POST', 'GET'])
 def filter_scholarship_results():
+    options = load_scholarship_options()
     if request.method == 'POST':
         #Get everything that should be filtered by
         #area of study, institution, gender, nationality, degree type
@@ -46,10 +50,12 @@ def filter_scholarship_results():
     rows = filter_scholarship(aos, institution, gender, nationality, degree_type)
     print(rows)
 
-    return render_template('scholarship-search.html', rows=rows)
+    return render_template('scholarship-search.html',aoss=options[0],institutions=options[1], genders=options[2], nationalities=options[3], degree_types=options[4], rows=rows)
 
 @app.route('/filter_bursary_results', methods = ['POST', 'GET'])
 def filter_bursary_results():
+    options = load_bursary_options()
+
     if request.method == 'POST':
         #Get everything that should be filtered by
         #area of study, institution, gender, nationality, degree type
@@ -69,10 +75,61 @@ def filter_bursary_results():
     rows = filter_bursary(aos, institution, nationality, degree_type)
     print(rows)
 
-    return render_template('bursary-search.html', rows=rows)
+    return render_template('bursary-search.html',aoss=options[0],institutions=options[1], nationalities=options[2], degree_types=options[3], rows=rows)
 
+#ALL INFO PAGES
+@app.route('/s1')
+def s1():
+    return render_template('scholarship_info/s1.html')
 
+@app.route('/s2')
+def s2():
+    return render_template('scholarship_info/s2.html')
 
+@app.route('/s3')
+def s3():
+    return render_template('scholarship_info/s3.html')
+
+@app.route('/s4')
+def s4():
+    return render_template('scholarship_info/s4.html')
+
+@app.route('/s5')
+def s5():
+    return render_template('scholarship_info/s5.html')
+
+#Bursaries
+@app.route('/b1')
+def b1():
+    return render_template('bursary_info/b1.html')
+
+@app.route('/b2')
+def b2():
+    return render_template('bursary_info/b2.html')
+
+@app.route('/b3')
+def b3():
+    return render_template('bursary_info/b3.html')
+
+@app.route('/b4')
+def b4():
+    return render_template('bursary_info/b4.html')
+
+@app.route('/b5')
+def b5():
+    return render_template('bursary_info/b5.html')
+
+@app.route('/b6')
+def b6():
+    return render_template('bursary_info/b6.html')
+
+@app.route('/b7')
+def b7():
+    return render_template('bursary_info/b7.html')
+
+@app.route('/b8')
+def b8():
+    return render_template('bursary_info/b8.html')
 
 
 #FILTER OPTIONS
@@ -234,11 +291,9 @@ def list_bursary():
 
     cur.execute("select * from bursary")
     
-    rows = cur.fetchall()
-    result = [list(i) for i in rows]
-    print(result)
+    rows = list(cur.fetchall())
 
-    return "Rows returned. Check terminal"
+    return rows
 
 #Print all from database to terminal
 def list_scholarship():
