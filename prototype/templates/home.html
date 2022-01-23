@@ -22,7 +22,7 @@
 </div>
 
 <div class="cards-group">
-    <div class="row scholarship-cards" style="padding: 2.5em 5em 2.5em 5em">
+    <div class="row scholarship-cards" style="padding: 0em 5em 0em 5em">
         {% for scholarship in scholarship_rows %}
         <div class="col-md-4">
             <div class="card rounded-30">
@@ -40,8 +40,8 @@
         {% endfor %}
     </div>
     <div class="row">
-        <a href="/scholarship" class="d-flex justify-content-center w-100">
-            <button class="btn btn-primary">See all scholarships</button>
+        <a href="/scholarship" class="d-flex justify-content-center w-100" style="padding-bottom: 4em; text-decoration: none;">
+            <button class="btn rounded-30" style="background-color:#FFDC96;">See all scholarships</button>
         </a>
     </div>
 </div>
@@ -54,7 +54,7 @@
 </div>
 
 <div class="cards-group">
-    <div class="row bursary-cards" style="padding: 2.5em 5em 2.5em 5em">
+    <div class="row bursary-cards" style="padding: 0em 5em 0em 5em">
         {% for bursary in bursary_rows %}
         <div class="col-md-4">
             <div class="card rounded-30">
@@ -72,8 +72,8 @@
         {% endfor %}
     </div>
     <div class="row d-flex justify-content-center w-100">
-        <a href="/bursary" class="d-flex justify-content-center w-100">
-            <button class="btn btn-primary">See all bursaries</button>
+        <a href="/bursary" style="text-decoration: none; padding-bottom: 4em;" class="d-flex justify-content-center w-100">
+            <button class="btn rounded-30" style="background-color:#FF3366;">See all bursaries</button>
         </a>
     </div>
 </div>
