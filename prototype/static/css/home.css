@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Rubik:wght@400;500;600;700&display=swap');
+
+html, body {
+    height: 100%;
+}
+
+* {
+    font-family: 'Rubik', sans-serif;
+}
+
+.navbar {
+    background-color: #011627;
+}
+
+.navbar img {
+    color: white;
+}
+
+.logo {
+    font-size: 28px;
+    text-shadow: 2px 3px 3px #FF3366;
+
+}
+
+#header-logo {
+    position: absolute;
+    top: 7px;
+    margin-left: 15px;
+}
+
+.navbar a {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/* .search-icon:hover {
+    filter: invert(100%) sepia(1%) saturate(4281%) hue-rotate(174deg) brightness(97%) contrast(101%);
+    fill: #F6F7F8;
+} */
+
+.color-yellow {
+    color: #FEDC97;
+}
+
+.color-red {
+    color: #FF3366;
+}
+
+.color-white {
+    color: white;
+}
+
+.color-teal {
+    color: #27DB96;
+}
+
+.nav-link:hover {
+    color: #F6F7F8;
+}
+
+#bursary-search-icon {
+    filter: invert(30%) sepia(64%) saturate(2562%) hue-rotate(326deg) brightness(101%) contrast(100%);
+}
+
+#scholarship-search-icon {
+    filter: invert(86%) sepia(18%) saturate(917%) hue-rotate(338deg) brightness(104%) contrast(99%)
+}
+
+footer {
+    background: #011627;
+}
+
+footer a {
+    text-decoration: none;
+}
+
+footer a:visited {
+    color: white;
+}
+
+/*
+.container .row .col:nth-child(2) div:nth-child(1){
+    background-color: #27DB96;
+    width: 30vw;
+    height: 25vh;
+}
+
+.container .row .col:nth-child(2) div:nth-child(2){
+    background-color: #FF3366;
+    width: 3vw;
+    height: 25vh;
+    position: relative;
+    top: -25vh;
+    left: 20px;
+}
+*/
+
+/* FROM julia-style.css */
+.titleimgfinal {
+    width: 100%;
+    height: 100%;
+    padding-top: 100px;
+}
+
+/* ==========================================
+FOR FOOTER
+========================================== */
+.queena-footer {
+    background: #2a2e32;
+}
+
+.text-small {
+    font-size: 0.9rem;
+}
+
+.queena-footer .footer-list-links li a {
+    text-decoration: none;
+    transition: all 0.3s;
+    color: rgb(231, 231, 231);
+}
+
+.queena-footer .footer-list-links li a:hover, a:focus {
+    text-decoration: none;
+}
+
+.queena-footer .footer-list-links li a:hover{
+    color: rgb(180, 180, 180);
+}
+
+.queena-footer .form-control {
+    background: #212529;
+    border-color: #545454;
+}
+
+.queena-footer .form-control:focus {
+    background: #212529;
+}

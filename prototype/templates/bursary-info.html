@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="../static/css/bursary-info.css">
+{% endblock %}
+
+{% block content %}
+<div class="row top-buffer">
+    <div class="col-md-auto mx-auto py-3 px-5 rounded-30 selection-color text-align-center">
+        <h1>{{ name }}</h1>
+    </div>
+</div>
+
+<!-- SUMMARY INFO  -->
+<div class="row top-buffer mt-5 info-row">
+    <div class="col-md-auto">
+        <h5>Institution</h5>
+    </div>
+</div>
+
+<div class="row info-row">
+    <div class="col-md-auto">
+        <h4>{{ institution }}</h4>
+    </div>
+</div>
+
+<div class="row divider rounded-30 top-buffer bottom-buffer">
+
+</div>
+
+<div class="row top-buffer info-row">
+    <div class="col-md-auto">
+        <h5>Field of Study</h5>
+    </div>
+</div>
+
+<div class="row info-row">
+    <div class="col-md-auto">
+        <h4>{{ fos }}</h4>
+    </div>
+</div>
+<!-- SUMMARY INFO END -->
+
+<div class="row light-red-color rounded-30 mt-5 p-4">
+    <p>{{ description }}</p>
+</div>
+
+<!-- BUTTONS -->
+<div class="row my-5">
+    <div class="col-md-auto mx-auto">
+
+        <!-- TEXT BUTTON -->
+        <button type="button" class="btn teal-color rounded-30 mx-4 info-button" data-bs-toggle="modal"
+            data-bs-target="#textModal">
+            Notify Me by Text
+        </button>
+
+        <!-- EMAIL BUTTON -->
+        <button type="button" class="btn teal-color rounded-30 mx-4 info-button" data-bs-toggle="modal"
+            data-bs-target="#emailModal">
+            Notify Me by Email
+        </button>
+
+        <!-- MORE INFO -->
+        <a role="button" class="button btn teal-color rounded-30 mx-4 info-button" target="_blank"
+            href="{{ url }}">
+            More Info <img src="../static/assets/external_link.svg">
+        </a>
+
+        <!-- PHONE NUMBER MODAL -->
+        <div class="modal fade" id="textModal" tabindex="-1" aria-labelledby="textModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h6>Be notified of updates and upcoming deadlines for this scholarship by entering you phone
+                            number below.</h6>
+
+                        <form action="" method="post" class="needs-validation">
+                            <input class="form-control mr-sm-2 top-buffer" type="tel" placeholder="Phone Number"
+                                aria-label="Phone Number">
+                        </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default rounded-30 grey-color px-4 mx-2"
+                            data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-default rounded-30 teal-color px-4 mx-2"
+                            data-bs-toggle="modal" data-bs-target="#submittedModal">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EMAIL MODAL -->
+        <div class="modal fade" id="emailModal" tabindex="-1" aria-labelledby="emailModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h6>Be notified of updates and upcoming deadlines for this scholarship by entering you email
+                            below.</h6>
+
+                        <form action="" method="post" class="needs-validation">
+                            <input class="form-control mr-sm-2 top-buffer" type="email" placeholder="Email"
+                                aria-label="Email">
+                        </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default rounded-30 grey-color px-4 mx-2"
+                            data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-default rounded-30 teal-color px-4 mx-2"
+                            data-bs-toggle="modal" data-bs-target="#submittedModal">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SUBMITTED MODAL -->
+        <div class="modal fade" id="submittedModal" tabindex="-1" aria-labelledby="submittedModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h6>Submitted!</h6>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default rounded-30 grey-color px-4 mx-2"
+                            data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+{% endblock %}
