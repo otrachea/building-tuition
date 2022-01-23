@@ -36,6 +36,21 @@ button {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
+#buttons button{
+    background-color: #2EC4B6;
+    border-radius: 10px;
+}
+
+#buttons a {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 10px;
+    background-color: #ACD2F9;
+}
+
+#buttons button, #buttons a {
+    width: 120px;
+}
+
 .card{
     margin: 2em 0em 2em 0em;
 }
