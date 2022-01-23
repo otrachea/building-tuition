@@ -25,9 +25,8 @@ h4 {
 }
 .form-control {
     background: #e7e6e6;
-    border-radius: 1rem !important;
+    border-radius: 1rem;
 }
-
 
 .top-buffer {
     margin-top: 20px;

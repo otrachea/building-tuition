@@ -1,16 +1,18 @@
-from re import search, template
 import sqlite3
-from typing import final
-from unicodedata import category
 from flask import Flask, request
 from flask import render_template
 from . import app
 
-import os, sys
+import os
+from twilio.rest import Client
 
 @app.route("/")
 def home():
-    return render_template('home.html')
+    #Get first 3 rows of scholarship
+    s_rows = list_scholarship()[:3]
+    b_rows = list_bursary()[:3]
+
+    return render_template('home.html',scholarship_rows=s_rows, bursary_rows=b_rows)
 
 #-------------------- LOADING SEARCH PAGES --------------------------
 @app.route("/scholarship")
@@ -51,13 +53,12 @@ def search_scholarship_results():
         category = request.form.get('search_by') 
         search = request.form['search_scholarship_value']
 
-        if category=="" or search == "":
+        if category=="Category" or search == "":
             rows = list_scholarship() #return all
         else:
             rows = search_scholarship(category, search) #search
 
     return render_template('scholarship-search.html',aoss=options[0],institutions=options[1], genders=options[2], nationalities=options[3], degree_types=options[4], rows=rows)
-
 
 @app.route('/search_bursary_results', methods = ['POST', 'GET'])
 def search_bursary_results():
@@ -85,14 +86,12 @@ def search_bursary_results():
         category = request.form.get('search_by') 
         search = request.form['search_bursary_value']
 
-        if category=="" or search == "":
+        if category=="Category" or search == "":
             rows = list_bursary() #return all
         else:
             rows = search_bursary(category, search) #search
 
     return render_template('bursary-search.html',aoss=options[0],institutions=options[1], nationalities=options[2], degree_types=options[3], rows=rows)
-
-
 
 
 #-------------------- FILTERING SEARCH PAGES --------------------------
@@ -130,20 +129,15 @@ def filter_bursary_results():
 
 #-------------------- INFO PAGES --------------------
 @app.route('/<id>')
-def scholarshipInfoPage(id):
-    desc = """Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Porta non pulvinar neque laoreet suspendisse interdum. Diam phasellus vestibulum lorem sed risus ultricies tristique. Suscipit tellus mauris a diam maecenas sed enim ut sem. Interdum velit laoreet id donec ultrices. Facilisis leo vel fringilla est ullamcorper eget nulla facilisi etiam. In nisl nisi scelerisque eu ultrices. Pharetra magna ac placerat vestibulum lectus. Sociis natoque penatibus et magnis dis parturient montes nascetur. Congue quisque egestas diam in arcu.
-            Elementum curabitur vitae nunc sed velit dignissim sodales ut. Ornare massa eget egestas purus viverra accumsan in nisl nisi. Mauris commodo quis imperdiet massa tincidunt nunc pulvinar sapien et. Ac odio tempor orci dapibus ultrices in iaculis nunc sed. A pellentesque sit amet porttitor eget dolor morbi non arcu. Sed vulputate mi sit amet mauris commodo quis imperdiet massa. Sed ullamcorper morbi tincidunt ornare massa eget egestas purus viverra. Et magnis dis parturient montes nascetur ridiculus mus. Fermentum leo vel orci porta non pulvinar neque. Eget nunc lobortis mattis aliquam faucibus purus in massa.
-            Amet venenatis urna cursus eget nunc scelerisque. Ut morbi tincidunt augue interdum velit. A diam maecenas sed enim. Lorem dolor sed viverra ipsum. Cursus eget nunc scelerisque viverra mauris in aliquam sem. Odio pellentesque diam volutpat commodo sed egestas egestas. Venenatis urna cursus eget nunc scelerisque viverra. Interdum velit euismod in pellentesque massa placerat. Lectus quam id leo in vitae turpis. Amet mattis vulputate enim nulla aliquet porttitor lacus luctus. Elementum sagittis vitae et leo duis ut diam. Sit amet risus nullam eget felis eget nunc. Condimentum lacinia quis vel eros donec ac odio. Eu non diam phasellus vestibulum lorem sed risus ultricies. Arcu ac tortor dignissim convallis aenean et tortor. Id volutpat lacus laoreet non curabitur.
-            Dictum varius duis at consectetur. Non curabitur gravida arcu ac. Dignissim enim sit amet venenatis urna cursus eget. Justo nec ultrices dui sapien eget mi. Ipsum a arcu cursus vitae congue mauris rhoncus aenean vel. Sed lectus vestibulum mattis ullamcorper velit sed ullamcorper morbi. Scelerisque mauris pellentesque pulvinar pellentesque. Libero justo laoreet sit amet cursus sit amet dictum. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus. Est sit amet facilisis magna etiam tempor orci eu lobortis. Sodales ut eu sem integer vitae. At lectus urna duis convallis convallis tellus id. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam. Nam libero justo laoreet sit amet. Vestibulum lorem sed risus ultricies tristique nulla aliquet enim. Mauris a diam maecenas sed enim ut sem viverra. Metus vulputate eu scelerisque felis. Vestibulum rhoncus est pellentesque elit. Risus at ultrices mi tempus imperdiet nulla malesuada pellentesque. Arcu odio ut sem nulla pharetra.
-            """
-    
+def scholarshipInfoPage(id):  
     if id[0] == 's': # IF SCHOLARSHIP
         row = filter_scholarship_by_id(id)[0]
-        return render_template('scholarship-info.html', name=row[0], institution=row[1], amount=row[2], fos=row[3], deadline=row[4], description=desc, url=row[5])
+        return render_template('scholarship-info.html', name=row[0], institution=row[1], amount=row[2], fos=row[3], deadline=row[4], url=row[5], description=row[6])
     elif id[0] == 'b': # IF BURSARY
         row = filter_bursary_by_id(id)[0]
-        return render_template('bursary-info.html', name=row[0], institution=row[1], fos=row[2], description=desc, url=row[3])
-
+        return render_template('bursary-info.html', name=row[0], institution=row[1], fos=row[2], url=row[3], description=row[4])
+    else:
+        return "404 Error Not Found"
         
 #-------------------- FILTER OPTIONS --------------------
 def filter_scholarship(aos, institution, gender, nationality, degree_type):
@@ -254,7 +248,7 @@ def filter_scholarship_by_id(id):
     cur = con.cursor()
 
     # BUILD QUERY
-    query = "SELECT name, institution, price, area_of_study, deadline, url FROM scholarship WHERE id='" + id + "'"
+    query = "SELECT name, institution, price, area_of_study, deadline, url, desc FROM scholarship WHERE id='" + id + "'"
     try:
         cur.execute(query)
     except: 
@@ -275,7 +269,7 @@ def filter_bursary_by_id(id):
     cur = con.cursor()
 
     # BUILD QUERY
-    query = "SELECT name, institution, area_of_study, url FROM bursary WHERE id='" + id + "'"
+    query = "SELECT name, institution, area_of_study, url, desc FROM bursary WHERE id='" + id + "'"
     try:
         cur.execute(query)
     except: 
@@ -344,8 +338,6 @@ def load_bursary_options():
     return options
 
 
-#Debugging
-#Print all from database to terminal
 @app.route("/list_bursary")
 def list_bursary():
     # if os.path.isfile("prototype/static/databases/bursary_database.db"):
@@ -382,12 +374,27 @@ def list_scholarship():
     
     return rows
 
-#DEBUG
-@app.route('/filter')
-def filter():
-    print("Filter scholarships")
-    filter_scholarship()
-    print("\n")
-    print("Filter bursaries")
-    filter_bursary()
-    return "Check terminal"
+
+@app.route('/text_message', methods = ['POST', 'GET'])
+def text_message():
+    print("text message run")
+    def send_to(msg, phone_number):
+        account_sid = 'ACc245ce913c51ebbaa5c7ff3ccc6c9c13'
+        auth_token = '75aef3993e15cf81cf93fb79597aa319'
+        client = Client(account_sid, auth_token)
+
+        message = client.messages \
+                        .create(
+                            body=msg,
+                            from_='+447588100237',
+                            to=phone_number
+                        )
+
+    if request.method == 'POST':
+        phone_number = request.form.get('phone-number') 
+        print(phone_number)
+        msg = "Reminder of a deadline"
+        send_to(msg, phone_number)
+
+    return
+
