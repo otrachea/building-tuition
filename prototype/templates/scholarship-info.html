@@ -58,7 +58,7 @@
 <!-- SUMMARY INFO END -->
 
 <div class="row selection-color rounded-30 mt-5 p-4">
-   <p>{{ description }}</p>
+    <p>{{ description }}</p>
 </div>
 
 <div class="row my-5">
@@ -77,8 +77,7 @@
         </button>
 
         <!-- MORE INFO BUTTON -->
-        <a role="button" class="button btn teal-color rounded-30 mx-4 info-button" target="_blank"
-            href="{{ url }}">
+        <a role="button" class="button btn teal-color rounded-30 mx-4 info-button" target="_blank" href="{{ url }}">
             More Info <img src="../static/assets/external_link.svg">
         </a>
 
@@ -92,17 +91,19 @@
 
                         <form action="" method="post" class="needs-validation">
                             <input class="form-control mr-sm-2 top-buffer" type="tel" placeholder="Phone Number"
-                                aria-label="Phone Number">
+                                aria-label="Phone Number" name="tel" required>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default rounded-30 grey-color px-4 mx-2"
+                                    data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-default rounded-30 teal-color px-4 mx-2"
+                                    data-bs-toggle="modal" data-bs-target="#submittedModal"> Submit 2 </button>
+                                <button type="submit" class="btn btn-default rounded-30 teal-color px-4 mx-2">
+                                    Submit
+                                </button>
+                            </div>
                         </form>
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default rounded-30 grey-color px-4 mx-2"
-                            data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-default rounded-30 teal-color px-4 mx-2"
-                            data-bs-toggle="modal" data-bs-target="#submittedModal">
-                            Submit
-                        </button>
                     </div>
                 </div>
             </div>
@@ -134,6 +135,44 @@
             </div>
         </div>
 
+
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn teal-color rounded-30 mx-4 info-button" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">
+            Open modal
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <form class="needs-validation" novalidate>
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp" placeholder="Enter email" required>
+                                <div class="invalid-feedback">
+                                    Please enter a valid email address
+                                </div>
+                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with
+                                    anyone else.</small>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
         <!-- SUBMITTED MODAL -->
         <div class="modal fade" id="submittedModal" tabindex="-1" aria-labelledby="submittedModal" aria-hidden="true">
             <div class="modal-dialog">
@@ -152,4 +191,8 @@
 
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="../static/js/validate.js"></script>
 {% endblock %}
