@@ -19,9 +19,13 @@ h4 {
     font-size: 24px;
 }
 
-select {
-    background-color: rgb(219, 219, 219);
+.form-select {
+    background: #e7e6e6;
 }
+.form-control {
+    background: #e7e6e6;
+}
+
 
 .top-buffer {
     margin-top: 20px;
@@ -55,6 +59,10 @@ button {
     margin: 2em 0em 2em 0em;
 }
 
+.card-body{
+    padding: 1em 1em 4em 1em;
+}
+
 .card h5{
     font-weight: 800;    
 }
@@ -64,10 +72,31 @@ button {
 }
 
 .more-info-btn{
-    background-color: #2EC4B6; 
+    background-color: #2EC4B6;
     width: 150px;
+    position: absolute;
+    bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
 }
 
 .card-text{
     font-size:large;
 }
+
+.row{
+    overflow: hidden; 
+}
+
+[class*="col-"]{
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+}
+
+
+
+  
+

@@ -104,3 +104,37 @@ footer a:visited {
     height: 100%;
     padding-top: 100px;
 }
+
+/* ==========================================
+FOR FOOTER
+========================================== */
+.queena-footer {
+    background: #2a2e32;
+}
+
+.text-small {
+    font-size: 0.9rem;
+}
+
+.queena-footer .footer-list-links li a {
+    text-decoration: none;
+    transition: all 0.3s;
+    color: rgb(231, 231, 231);
+}
+
+.queena-footer .footer-list-links li a:hover, a:focus {
+    text-decoration: none;
+}
+
+.queena-footer .footer-list-links li a:hover{
+    color: rgb(180, 180, 180);
+}
+
+.queena-footer .form-control {
+    background: #212529;
+    border-color: #545454;
+}
+
+.queena-footer .form-control:focus {
+    background: #212529;
+}

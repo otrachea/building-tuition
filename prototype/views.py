@@ -249,7 +249,7 @@ def load_scholarship_options():
     options = []
     for param in parameters:
         op = [] #placeholder for values
-        query = "SELECT DISTINCT "+ param +" FROM scholarship;"
+        query = "SELECT DISTINCT "+ param +" FROM scholarship ORDER BY "+ param +" ASC;"
         cur.execute(query)
         values = cur.fetchall()
         
@@ -277,7 +277,7 @@ def load_bursary_options():
     options = []
     for param in parameters:
         op = [] #placeholder for values
-        query = "SELECT DISTINCT "+ param +" FROM bursary;"
+        query = "SELECT DISTINCT "+ param +" FROM bursary ORDER BY "+ param +" ASC;"
         cur.execute(query)
         values = cur.fetchall()
         
