@@ -73,10 +73,12 @@ html, body {
 
 .scholarship-cards .card{
     background-color: #FFDC96;
+    height: 80%;
 }
 
 .bursary-cards .card{
     background-color: #FF3366;
+    height: 80%;
 }
 
 .card{

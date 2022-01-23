@@ -78,3 +78,6 @@ def populate_bursary():
     conn.close()
 
     print("Loading completed")
+
+create_bursary()
+populate_bursary()
