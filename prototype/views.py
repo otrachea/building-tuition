@@ -1,12 +1,10 @@
-from re import search, template
 import sqlite3
-from typing import final
-from unicodedata import category
 from flask import Flask, request
 from flask import render_template
 from . import app
 
-import os, sys
+import os
+from twilio.rest import Client
 
 @app.route("/")
 def home():
@@ -346,8 +344,6 @@ def load_bursary_options():
     return options
 
 
-#Debugging
-#Print all from database to terminal
 @app.route("/list_bursary")
 def list_bursary():
     # if os.path.isfile("prototype/static/databases/bursary_database.db"):
@@ -384,12 +380,27 @@ def list_scholarship():
     
     return rows
 
-#DEBUG
-@app.route('/filter')
-def filter():
-    print("Filter scholarships")
-    filter_scholarship()
-    print("\n")
-    print("Filter bursaries")
-    filter_bursary()
-    return "Check terminal"
+
+@app.route('/text_message', methods = ['POST', 'GET'])
+def text_message():
+    print("text message run")
+    def send_to(msg, phone_number):
+        account_sid = 'ACc245ce913c51ebbaa5c7ff3ccc6c9c13'
+        auth_token = '75aef3993e15cf81cf93fb79597aa319'
+        client = Client(account_sid, auth_token)
+
+        message = client.messages \
+                        .create(
+                            body=msg,
+                            from_='+447588100237',
+                            to=phone_number
+                        )
+
+    if request.method == 'POST':
+        phone_number = request.form.get('phone-number') 
+        print(phone_number)
+        msg = "Reminder of a deadline"
+        send_to(msg, phone_number)
+
+    return
+
