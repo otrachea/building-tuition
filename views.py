@@ -1,11 +1,13 @@
 import sqlite3
 from flask import Flask, request
 from flask import render_template
-from . import app
+import flask
 
 import os
 from twilio.rest import Client
 from twilio.base.exceptions import TwilioRestException
+
+app = flask.Flask(__name__)
 
 @app.route("/")
 def home():
