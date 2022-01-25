@@ -1,9 +1,133 @@
-Name,Age,Area of Study,Institution,Degree Type,Nationality,Country,Residency,URL,ID
-Ontario First Generation Bursary,Any,Any,Any,Undergraduate,Canadian,Canada,Domestic,https://osap.gov.on.ca/OSAPPortal/eAny-ZListofAid/PRDR022019,b1
-16 to 19 Bursary,16 to 19,Any,Any,Any,Any,England,Domestic,https://www.ncclondon.ac.uk/bursary,b2
-19+ Adult Bursar,19 or over,Any,Any,Any,Any,England,Domestic,https://www.ncclondon.ac.uk/bursary,b3
-Advanced Learner Loan Bursary,19 or over,Any,Any,Any,Any,England,Domestic,https://www.ncclondon.ac.uk/bursary,b4
-20+ Childcare,20+,Any,Any,Any,Any,England,Domestic,https://www.ncclondon.ac.uk/bursary,b5
-16 to 19 Bursary Fund,16 to 19,Any,Any,Any,Any,England,Domestic,https://www.gov.uk/1619-bursary-fund,b6
-Bursary for Students with Disabilities (BSWD),Any,Any,Any,Postsecondary,Any,Canada,Domestic,https://osap.gov.on.ca/OSAPPortal/eAny-ZListofAid/PRDR019233.html,b7
-Indigenous Student Bursary,Any,Any,Any,Postsecondary,Canadian,Canada,Domestic,https://osap.gov.on.ca/OSAPPortal/eAny-ZListofAid/PRDR019231.html,b8
+Name,Age,Area of Study,Institution,Degree Type,Nationality,Country,Residency,URL,ID,Description
+Ontario First Generation Bursary,Any,Any,Ontario Universities,Undergraduate,Canadian,Canada,Domestic,https://osap.gov.on.ca/OSAPPortal/eAny-ZListofAid/PRDR022019,b1,"The Ontario First Generation Bursary is for postsecondary students whose parents have never attended postsecondary studies. Its for students with financial need attending a publicly-assisted college or university in Ontario only. | Eligibility:
+You may be eligible if you meet all of these eligibility requirements: Youre attending a publicly-assisted college or university in Ontario, Your parent(s) have never participated in postsecondary studies anywhere in the world on either a full or part-time basis, Youre enrolled in a first-entry undergraduate program. Second entry programs (e.g., law or medicine) and graduate programs are not eligible., You dont already have a postsecondary degree, diploma or certificate, Youre not receiving assistance through the Second Career program, You meet the citizenship and Ontario residency requirements listed in the OSAP Application for Full-Time Students, Youve met the financial need criteria defined by your school for this bursary, Check with your school as they may have additional eligibility requirements in addition to those listed above. For example, some schools require that you be in full-time studies. You dont have to apply for either Ontario Student Assistance Program for Full-Time Students or Ontario Student Assistance Program for Part-Time Students to be considered for this bursary. |How Much Can I Get?: The amount of bursary available varies. It ranges from $1,000 to $3,500. The actual amount awarded is determined by your school. Contact your schools financial aid office for details. | How to Apply: If you applied for either OSAP for Full-Time Students or OSAP for Part-Time Students, you must submit this application separately to be considered for the bursary. Use your schools Ontario First Generation Bursary application. The application will outline what supporting documents (if any) are required. | Deadlines: The Application, document and review details for this bursary vary by school. Check with your schools financial aid office for details. | Checking Your Application Status: Contact your schools financial aid office with any questions that you have on the status of your application. |Getting Your Aid: Check with your school. They determine how this bursary is issued (e.g. by cheque, reducing outstanding fees, etc.)."
+16 to 19 Bursary,16 to 19,Any,New City College,Any,Any,England,Domestic,https://www.ncclondon.ac.uk/bursary,b2,"Eligibility
+Students must be aged 16 or over but under 19 on 31 August 2021 to be eligible for help from the bursary fund in the 2021 to 2022 academic year. Students aged 19 on 31st August are only eligible to receive a discretionary bursary if they are continuing on a study programme they began aged 16 to 18 (19+ continuers) or have an Education, Health and Care Plan (EHCP) up to the age of 24.
+
+There are two types of bursaries: Discretionary and Vulnerable.
+
+Discretionary Bursary 
+Those who are eligible are students who have a parental income of less than 21,000 per year or in receipt of a means tested benefit such as:
+-Income Support
+-Jobseekers Allowance
+-Employment Support Allowance (ESA)
+-Support under part IV of the -Immigration and Asylum Act 1999
+-Guaranteed element of State Pension Credit
+-Working Tax Credit with an annual gross income of 21,000 or less
+-Universal Credit
+
+The amount awarded in the bursay is dependent on assessment of need and available funds. Payments will be made in 5 half-termly instalments
+
+Vulnerable Bursary:
+Those who are eligibile are students who are:
+-In care
+-Care leavers
+-Receiving Income Support, or Universal Credit because they are financially supporting themselves or financially supporting themselves and someone who is dependent on them and living with them such as a child or partner
+-Receiving Disability Living Allowance or Personal Independence Payments in their own right as well as Employment and Support Allowance or Universal Credit in their own right
+
+The total for this bursary is up to 1200 per year which will be paid in 5 half termly instalments. This is dependent on assessment of need.
+
+*Proof of income must be dated within 3 months of application."
+19+ Adult Bursar,19 or over,Any,New City College,Any,Any,England,Domestic,https://www.ncclondon.ac.uk/bursary,b3,"Eligibility: 
+The Adult Bursary is for students who will be aged 19 or over on 31 August 2021. The fund is there to support learners with maintenance, materials, stationary including books, additional academic support, and other educational costs.
+
+Those eligible for the bursary are students who have an income of less than 21,000 per year or in receipt of a means tested benefit such as:
+-Income Support
+-Jobseekers Allowance
+-Employment Support Allowance (ESA)
+-Support under part IV of the Immigration and Asylum Act 1999
+-Guaranteed element of State Pension Credit
+-Working Tax Credit with an annual gross income of 21,000 or less
+-Universal Credit
+
+*Proof of income must be dated within 3 months of application.
+
+How Much WIll You Receive and When?
+-Studying 4-7.9 hours a week = 100 (Estimated)
+-Studying 8-11.9 hours a week = 150 (Estimated)
+-Studying 12+ hours a week = 200 (Estimated)
+
+Learners on high cost courses who have paid tuition fees may receive a higher bursary payment.
+
+If your course requires you to purchase kit/uniform or equipment, and you are on low income, you can apply for support towards these costs. If you qualify, the curriculum area may order these for you or we may reimburse you if you have purchased the items in advance.
+
+Payment will be made in one instalment in December. Late applicants will be notified of payment date subject to availability of funds.
+
+The award amount will depend on the timing of your application and subject to you obtaining an attendance of 90% or above for full payment. Where attendance is between 75% and 89% you will only receive 50% of the bursary. Payments will be withheld for attendance lower than 75%. You can ONLY submit an appeal through your tutor/progress coach if you can EVIDENCE an exceptional reason for why you should receive a payment. All payments will be made via bank transfer only."
+20+ Childcare,20+,Any,New City College,Any,Any,England,Domestic,https://www.ncclondon.ac.uk/bursary,b4,"Eligibility
+If you are a parent who is aged 20+ and your income is less than 21,000 per year you may qualify for support towards childcare whilst you study.
+
+Evidence Required
+If the childcare is provided by an Ofsted registered private nursery/after school club, the following evidence is required to obtain a bursary: 
+-Proof of income
+-Childs full birth certificate
+-Invoice or letter confirming start date, weekly cost and bank details
+
+If the childcare is provided by an Ofsted Registered Childminder, the following evidence is required to obtain a bursary:
+-Proof of income
+-Childs full birth certificate
+-Childminders Insurance copy
+-Childminders registration copy
+-Invoice or letter confirming start date, weekly cost and bank details"
+Bursary for Students with Disabilities (BSWD),Any,Any,Ontario Universities,Postsecondary,Any,Canada,Domestic,https://osap.gov.on.ca/OSAPPortal/en/A-ZListofAid/PRDR019233.html,b5,"The Bursary for Students with Disabilities (BSWD) helps full and part-time postsecondary students with the costs of their disability-related educational services and equipment.
+
+By submitting a BSWD application, you may receive assistance for the disability-related accommodations you need, such as note-takers, tutors, interpreters or technical aids while youre in postsecondary studies.
+
+Eligibility
+To be eligible for the BWSD you must meet the following criteria:
+-Youve self-identified as having a permanent or temporary disability.
+-Youve applied for and are eligible for funding from one of the following sources:
+   -Ontario Student Assistance Program for Full-Time Students and have at least $1 in calculated provincial need; or
+-Ontario Student Assistance Program for Part-Time Students and are receiving an Ontario Part-Time Grant; or an Institution-Funded Special Bursary (students at public universities and colleges in Ontario only).
+
+How Much Can I Get?
+The amount of aid provided depends on the costs of your required disability-related educational services and equipment. If you have a permanent or temporary disability you can apply for the BWSD. The maximum funding you can receive from the BWSD is $2000.
+
+How to Apply
+The BSWD application outlines what supporting documents are required based on the accommodations you request. It also outlines who to contact if you need help in completing your application.
+
+After You Apply
+Your financial aid office will check the information and documentation provided for your application to make sure its complete.
+
+Next, your application is assessed for eligibility and to determine the most efficient and cost-effective method to fund the equipment and services required. The Office for Students with Disabilities at your school and/or the Student Financial Assistance Branch may be involved in the assessment of your application.
+
+Contact your financial aid office if you have any questions about the status of your application.
+
+Deadlines
+Application Deadline
+Your application must be received by your financial aid office no later than 60 days before the end of your study period.
+
+Documentation Deadline
+All required documents must be received by your financial aid office no later than 40 days before the end of your study period.
+
+Receipt Deadline
+Receipts corresponding to the funding provided must be received no later than 30 days after the end of your study period. 
+
+"
+Indigenous Student Bursary,Any,Any,Ontario Universities,Postsecondary,Canadian,Canada,Domestic,https://osap.gov.on.ca/OSAPPortal/en/A-ZListofAid/PRDR019231.html,b6,"The Indigenous Student Bursary provides aid to Indigenous students with financial need who are attending either publiclyassisted colleges and universities in Ontario or an approved Aboriginal Institute in Ontario.
+
+Eligibility
+You may be eligible for this bursary if meet the following requirements:
+-Youre attending a publicly-assisted college or university in Ontario or an approved Aboriginal institute in Ontario.
+-Youre in an approved postsecondary academic program (e.g. degree and diploma programs) or training program (e.g. apprenticeships).
+-You self-identify as being an Indigenous person in Canada (see definition, below).
+-You meet citizenship and Ontario residency requirements as outlined on the OSAP Application for Full-Time Students.
+-You have demonstrated financial need based on the criteria as set out by your school.
+-Your school may have additional eligibility requirements in addition to those listed above. For example, some schools require that you be in full-time studies. Contact your schools financial aid office for complete details.
+
+You dont have to apply for either Ontario Student Assistance Program for Full-Time Students or Ontario Student Assistance Program for Part-Time Students to be considered for this bursary.
+
+How Much Can I Get?
+The amount of bursary available varies and can range from $1,000 to $3,500. The actual amount awarded is determined by your school. Contact your schools financial aid office for details.
+
+How to Apply
+Use your schools Indigenous Student Bursary application. Their application will specify what supporting documents are required.
+
+Deadlines
+Application, document and review details for this bursary vary by school. Check with your schools financial aid office for details.
+
+Checking Your Application Status
+Contact your schools financial aid office with any questions that you have on the status of your Indigenous Student Bursary application.
+
+Getting Your Aid
+Check with your school. They determine how this bursary is issued (e.g. by cheque, reducing outstanding fees, etc.)."

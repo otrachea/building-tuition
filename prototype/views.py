@@ -5,6 +5,7 @@ from . import app
 
 import os
 from twilio.rest import Client
+from twilio.base.exceptions import TwilioRestException
 
 @app.route("/")
 def home():
@@ -129,19 +130,14 @@ def filter_bursary_results():
 
 #-------------------- INFO PAGES --------------------
 @app.route('/<id>')
-def scholarshipInfoPage(id):
-    desc = """Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Porta non pulvinar neque laoreet suspendisse interdum. Diam phasellus vestibulum lorem sed risus ultricies tristique. Suscipit tellus mauris a diam maecenas sed enim ut sem. Interdum velit laoreet id donec ultrices. Facilisis leo vel fringilla est ullamcorper eget nulla facilisi etiam. In nisl nisi scelerisque eu ultrices. Pharetra magna ac placerat vestibulum lectus. Sociis natoque penatibus et magnis dis parturient montes nascetur. Congue quisque egestas diam in arcu.
-            Elementum curabitur vitae nunc sed velit dignissim sodales ut. Ornare massa eget egestas purus viverra accumsan in nisl nisi. Mauris commodo quis imperdiet massa tincidunt nunc pulvinar sapien et. Ac odio tempor orci dapibus ultrices in iaculis nunc sed. A pellentesque sit amet porttitor eget dolor morbi non arcu. Sed vulputate mi sit amet mauris commodo quis imperdiet massa. Sed ullamcorper morbi tincidunt ornare massa eget egestas purus viverra. Et magnis dis parturient montes nascetur ridiculus mus. Fermentum leo vel orci porta non pulvinar neque. Eget nunc lobortis mattis aliquam faucibus purus in massa.
-            Amet venenatis urna cursus eget nunc scelerisque. Ut morbi tincidunt augue interdum velit. A diam maecenas sed enim. Lorem dolor sed viverra ipsum. Cursus eget nunc scelerisque viverra mauris in aliquam sem. Odio pellentesque diam volutpat commodo sed egestas egestas. Venenatis urna cursus eget nunc scelerisque viverra. Interdum velit euismod in pellentesque massa placerat. Lectus quam id leo in vitae turpis. Amet mattis vulputate enim nulla aliquet porttitor lacus luctus. Elementum sagittis vitae et leo duis ut diam. Sit amet risus nullam eget felis eget nunc. Condimentum lacinia quis vel eros donec ac odio. Eu non diam phasellus vestibulum lorem sed risus ultricies. Arcu ac tortor dignissim convallis aenean et tortor. Id volutpat lacus laoreet non curabitur.
-            Dictum varius duis at consectetur. Non curabitur gravida arcu ac. Dignissim enim sit amet venenatis urna cursus eget. Justo nec ultrices dui sapien eget mi. Ipsum a arcu cursus vitae congue mauris rhoncus aenean vel. Sed lectus vestibulum mattis ullamcorper velit sed ullamcorper morbi. Scelerisque mauris pellentesque pulvinar pellentesque. Libero justo laoreet sit amet cursus sit amet dictum. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus. Est sit amet facilisis magna etiam tempor orci eu lobortis. Sodales ut eu sem integer vitae. At lectus urna duis convallis convallis tellus id. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam. Nam libero justo laoreet sit amet. Vestibulum lorem sed risus ultricies tristique nulla aliquet enim. Mauris a diam maecenas sed enim ut sem viverra. Metus vulputate eu scelerisque felis. Vestibulum rhoncus est pellentesque elit. Risus at ultrices mi tempus imperdiet nulla malesuada pellentesque. Arcu odio ut sem nulla pharetra.
-            """
-    
+def scholarshipInfoPage(id):  
+    desc = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     if id[0] == 's': # IF SCHOLARSHIP
         row = filter_scholarship_by_id(id)[0]
-        return render_template('scholarship-info.html', name=row[0], institution=row[1], amount=row[2], fos=row[3], deadline=row[4], description=desc, url=row[5])
+        return render_template('scholarship-info.html', name=row[0], institution=row[1], amount=row[2], fos=row[3],description=desc, deadline=row[4], url=row[5])
     elif id[0] == 'b': # IF BURSARY
         row = filter_bursary_by_id(id)[0]
-        return render_template('bursary-info.html', name=row[0], institution=row[1], fos=row[2], description=desc, url=row[3])
+        return render_template('bursary-info.html', name=row[0], institution=row[1], fos=row[2], url=row[3], description=row[4])
     else:
         return "404 Error Not Found"
         
@@ -275,7 +271,7 @@ def filter_bursary_by_id(id):
     cur = con.cursor()
 
     # BUILD QUERY
-    query = "SELECT name, institution, area_of_study, url FROM bursary WHERE id='" + id + "'"
+    query = "SELECT name, institution, area_of_study, url, desc FROM bursary WHERE id='" + id + "'"
     try:
         cur.execute(query)
     except: 
@@ -386,21 +382,23 @@ def text_message():
     print("text message run")
     def send_to(msg, phone_number):
         account_sid = 'ACc245ce913c51ebbaa5c7ff3ccc6c9c13'
-        auth_token = '75aef3993e15cf81cf93fb79597aa319'
+        auth_token = '0b0d8d179ac22d33c1ea31b976915f7b'
         client = Client(account_sid, auth_token)
 
-        message = client.messages \
-                        .create(
-                            body=msg,
-                            from_='+447588100237',
-                            to=phone_number
-                        )
+        try:
+            message = client.messages \
+                            .create(
+                                body=msg,
+                                from_='+447588100237',
+                                to=phone_number
+                            )
+        except TwilioRestException as e:
+            print(e)
 
     if request.method == 'POST':
         phone_number = request.form.get('phone-number') 
-        print(phone_number)
         msg = "Reminder of a deadline"
         send_to(msg, phone_number)
 
-    return
+    return scholarshipInfoPage('b1')
 

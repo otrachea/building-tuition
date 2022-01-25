@@ -47,7 +47,7 @@ def create_bursary():
 
     #Create table
     conn.execute("""CREATE TABLE bursary (name TEXT, age TEXT, area_of_study TEXT, institution TEXT, degree_type TEXT, 
-                                            nationality TEXT, country TEXT, residency TEXT, url TEXT, id TEXT PRIMARY KEY)""")
+                                            nationality TEXT, country TEXT, residency TEXT, url TEXT, id TEXT PRIMARY KEY, desc TEXT)""")
 
     print("table created")
 
@@ -68,9 +68,9 @@ def populate_bursary():
     for row in data:
         print(row) #Debug
         insert_query = """INSERT INTO bursary (name, age, area_of_study, institution, degree_type, 
-                                        nationality, country, residency, url, id)
-                                        VALUES (?,?,?,?,?,?,?,?,?,?)"""
-        cur.execute(insert_query, (row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9]))
+                                        nationality, country, residency, url, id, desc)
+                                        VALUES (?,?,?,?,?,?,?,?,?,?,?)"""
+        cur.execute(insert_query, (row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10]))
 
     #Save changes
     conn.commit()
