@@ -1,0 +1,11 @@
+@import "search.css";
+
+#search-title-bubble {
+    background-color: #FFDC96;
+}
+
+.card {
+    background-color: #FFDC96;
+    height: 80%;
+}
+

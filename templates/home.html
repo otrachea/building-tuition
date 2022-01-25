@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block content %}
+<img src="../static/assets/titleimgfinal.png" class="titleimgfinal">
+<!-- <div class="row">
+    <div class="col">
+
+    </div>
+    <div class="col" style="border: 2px orange solid;">
+        <div>
+            <h1>Helping students build their tuition one <span class="color-yellow">scholarship</span> and <span class="color-red">bursary</span> at a time
+            </h1>
+        </div>
+        <div></div>
+    </div>
+</div> -->
+
+<!-- SCHOLARSHIP CARDS -->
+<div class="row top-buffer">
+    <div class="col-md-auto mx-auto py-3 px-5 rounded-30" style="background-color: #FFDC96;">
+        <h1>Scholarship Search</h1>
+    </div>
+</div>
+
+<div class="cards-group">
+    <div class="row scholarship-cards" style="padding: 0em 5em 0em 5em">
+        {% for scholarship in scholarship_rows %}
+        <div class="col-md-4">
+            <div class="card rounded-30">
+                <div class="card-body h-100">
+                    <h5 class="card-title">{{scholarship[0]}}</h5>
+                    <h7 class="card-subtitle">{{scholarship[3]}}<br>{{scholarship[2]}}</h7><br>
+                    <span class="card-text">{{scholarship[1]}}</span><br>
+                    <span class="card-text" style="padding-bottom: 5px;">Deadline: {{scholarship[10]}}</span><br><br>
+                    <div class="w-100 text-center">
+                        <a href="/{{scholarship[11]}}"><button class="btn more-info-btn rounded-30">More Info</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}   
+    </div>
+    <div class="row">
+        <a href="/scholarship" class="d-flex justify-content-center w-100" style="padding-bottom: 4em; text-decoration: none;">
+            <button class="btn rounded-30" style="background-color:#FFDC96;">See all scholarships</button>
+        </a>
+    </div>
+</div>
+
+<!-- BURSARY CARDS -->
+<div class="row top-buffer">
+    <div class="col-md-auto mx-auto py-3 px-5 rounded-30" style="background-color: #FF3366;">
+        <h1>Bursary Search</h1>
+    </div>
+</div>
+
+<div class="cards-group">
+    <div class="row bursary-cards" style="padding: 0em 5em 0em 5em">
+        {% for bursary in bursary_rows %}
+        <div class="col-md-4">
+            <div class="card rounded-30">
+                <div class="card-body h-100">
+                    <h5 class="card-title">{{bursary[0]}}</h5>
+                    <h7 class="card-subtitle">{{bursary[3]}}<br>{{bursary[2]}}</h7><br>
+                    <span class="card-text">{{bursary[1]}}</span><br>
+                    <div class="w-100 text-center">
+                        <a href="/{{bursary[9]}}"><button class="btn more-info-btn rounded-30">More Info</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="row d-flex justify-content-center w-100">
+        <a href="/bursary" style="text-decoration: none; padding-bottom: 4em;" class="d-flex justify-content-center w-100">
+            <button class="btn rounded-30" style="background-color:#FF3366;">See all bursaries</button>
+        </a>
+    </div>
+</div>
+
+
+{% endblock %}
