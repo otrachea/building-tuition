@@ -65,6 +65,65 @@ html, body {
     filter: invert(86%) sepia(18%) saturate(917%) hue-rotate(338deg) brightness(104%) contrast(99%)
 }
 
+.text-align-right {
+    text-align: right;
+}
+
+.text-align-left {
+    text-align: left;
+}
+
+.home-text-1-padding {
+    padding-top: 3em;
+    padding-bottom: 3em;
+    padding-left: 2em;
+    padding-right: 1.5em;
+}
+
+h4 {
+    font-weight: 400;
+}
+
+:root {
+    /* --hexagon-colour: linear-gradient(90deg, rgba(254,220,151,1) 0%, rgba(255,51,102,1) 100%); */
+    --hexagon-colour: #ff3366;
+}
+
+.hexagon {
+    position: relative;
+    width: 300px; 
+    height: 173.21px;
+    /* background-color: #64c7cc; */
+    margin: 86.60px 0;
+    border-left: solid 5px var(--hexagon-colour);
+    border-right: solid 5px var(--hexagon-colour);
+}
+  
+.hexagon:before,
+.hexagon:after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    width: 212.13px;
+    height: 212.13px;
+    -webkit-transform: scaleY(0.5774) rotate(-45deg);
+    -ms-transform: scaleY(0.5774) rotate(-45deg);
+    transform: scaleY(0.5774) rotate(-45deg);
+    background-color: inherit;
+    left: 38.9340px;
+}
+  
+.hexagon:before {
+    top: -106.0660px;
+    border-top: solid 7.0711px var(--hexagon-colour);
+    border-right: solid 7.0711px var(--hexagon-colour);
+}
+  
+.hexagon:after {
+    bottom: -106.0660px;
+    border-bottom: solid 7.0711px var(--hexagon-colour);
+    border-left: solid 7.0711px var(--hexagon-colour);
+}
 
 /* CARDS */
 .top-buffer{
